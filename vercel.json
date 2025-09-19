@@ -1,23 +1,5 @@
 {
-  "version": 2,
-  "buildCommand": "pnpm build",
-  "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "devCommand": "pnpm dev",
-  "regions": ["bom1"],
-  "functions": {
-    "app/**/*.{ts,tsx}": {
-      "runtime": "@vercel/next@latest"
-    }
-  },
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "runtime": "nodejs18.x"
-      }
-    }
-  ]
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile"
 }
