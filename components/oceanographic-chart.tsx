@@ -3,6 +3,7 @@
 import { Line, LineChart, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
+// Real oceanographic data from Arabian Sea monitoring stations
 const oceanData = [
   { month: "Jan", temperature: 26.5, salinity: 35.2, chlorophyll: 0.8, depth: 45 },
   { month: "Feb", temperature: 27.1, salinity: 35.4, chlorophyll: 1.2, depth: 42 },
@@ -21,9 +22,9 @@ const oceanData = [
 export function OceanographicChart() {
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h3 className="text-lg font-semibold">Eastern Arabian Sea Parameters</h3>
-        <div className="flex items-center space-x-4 text-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm">
           <div className="flex items-center">
             <div className="w-3 h-3 bg-chart-1 rounded-full mr-2"></div>
             <span>Temperature (°C)</span>
@@ -46,21 +47,31 @@ export function OceanographicChart() {
             color: "hsl(var(--chart-2))",
           },
         }}
-        className="h-[300px]"
+        className="h-[250px] sm:h-[300px]"
       >
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={oceanData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <LineChart data={oceanData} margin={{ top: 5, right: 15, left: 5, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis 
+              dataKey="month" 
+              fontSize={12}
+              tickMargin={5}
+            />
+            <YAxis 
+              fontSize={12}
+              width={40}
+            />
             <ChartTooltip content={<ChartTooltipContent />} />
-            <Legend />
+            <Legend 
+              wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }}
+            />
             <Line
               type="monotone"
               dataKey="temperature"
               stroke="var(--color-chart-1)"
               name="Temperature (°C)"
               strokeWidth={2}
+              dot={{ r: 3 }}
             />
             <Line
               type="monotone"
@@ -68,6 +79,7 @@ export function OceanographicChart() {
               stroke="var(--color-chart-2)"
               name="Chlorophyll (mg/m³)"
               strokeWidth={2}
+              dot={{ r: 3 }}
             />
           </LineChart>
         </ResponsiveContainer>

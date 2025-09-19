@@ -46,23 +46,22 @@ export function DashboardContent() {
       </div>
 
       {/* Header Section */}
-      <div className="flex items-center justify-between">
+            {/* Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-balance">Research Dashboard</h2>
-          <p className="text-muted-foreground text-pretty">
-            Real-time insights into marine ecosystems and biodiversity
-          </p>
+          <h2 className="text-2xl font-bold tracking-tight">Research Dashboard</h2>
+          <p className="text-muted-foreground">Real-time marine data monitoring and analysis platform</p>
         </div>
-        <div className="flex space-x-2">
-          <Button variant="outline" className="water-droplet">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
+          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+            <Activity className="mr-1 h-3 w-3" />
+            System Active
+          </Badge>
+          <Button variant="outline" size="sm" className="w-full sm:w-auto">
             <RefreshCw className="mr-2 h-4 w-4" />
             Refresh Data
           </Button>
-          <Button variant="outline">
-            <Calendar className="mr-2 h-4 w-4" />
-            Last 30 Days
-          </Button>
-          <Button className="ocean-gradient text-white">
+          <Button size="sm" className="w-full sm:w-auto">
             <Download className="mr-2 h-4 w-4" />
             Export Report
           </Button>
