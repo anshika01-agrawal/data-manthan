@@ -10,6 +10,8 @@ import { Menu, X } from "lucide-react"
 const menuItems = [
   { icon: BarChart3, label: "Dashboard", href: "/", active: false },
   { icon: Waves, label: "Data Visualization", href: "/data-visualization", active: false },
+  { icon: Database, label: "INCOIS Portal", href: "/incois-portal", active: false },
+  { icon: Activity, label: "Ocean Analysis", href: "/oceanographic-analysis", active: false },
   { icon: Dna, label: "eDNA Processing", href: "/edna-processing", active: false },
   { icon: Fish, label: "Otolith Analysis", href: "/otolith-analysis", active: false },
 ]
