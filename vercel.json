@@ -1,8 +1,23 @@
 {
+  "version": 2,
   "buildCommand": "pnpm build",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
   "devCommand": "pnpm dev",
-  "ignoreCommand": "if [ \"$VERCEL_GIT_COMMIT_REF\" != \"main\" ]; then exit 1; else exit 0; fi"
+  "regions": ["bom1"],
+  "functions": {
+    "app/**/*.{ts,tsx}": {
+      "runtime": "@vercel/next@latest"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next",
+      "config": {
+        "runtime": "nodejs18.x"
+      }
+    }
+  ]
 }
