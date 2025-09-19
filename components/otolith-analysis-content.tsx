@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -8,14 +8,24 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Upload, Microscope, BarChart3, Download, Eye, Zap, FileImage } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Switch } from "@/components/ui/switch"
+import { Upload, Microscope, BarChart3, Download, Eye, Zap, FileImage, Fish, Camera, Ruler, Calculator, Search, Filter, Settings } from "lucide-react"
 import { OtolithViewer } from "@/components/otolith-viewer"
 import { MorphometricsChart } from "@/components/morphometrics-chart"
 import { SpeciesClassification } from "@/components/species-classification"
+import Image from "next/image"
+import { otolithAnalysisData, morphometricsData, marineSpeciesData } from "@/lib/dummyData"
 
 export function OtolithAnalysisContent() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [analysisStatus, setAnalysisStatus] = useState<"idle" | "processing" | "complete">("idle")
+  const [selectedFish, setSelectedFish] = useState("")
+  const [measurementMode, setMeasurementMode] = useState<"manual" | "auto">("auto")
+  const [searchTerm, setSearchTerm] = useState("")
+  const [ageFilter, setAgeFilter] = useState("")
+  const [autoAnalysis, setAutoAnalysis] = useState(true)
 
   const handleFileUpload = () => {
     setAnalysisStatus("processing")
@@ -31,27 +41,231 @@ export function OtolithAnalysisContent() {
     }, 200)
   }
 
+  const runAgeAnalysis = () => {
+    setAnalysisStatus("processing")
+    // Simulate AI analysis
+    setTimeout(() => {
+      setAnalysisStatus("complete")
+    }, 3000)
+  }
+
+  const filteredOtolithData = otolithAnalysisData.filter(item => {
+    const matchesSearch = item.fishId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.species.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.location.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesAge = !ageFilter || item.age.toString() === ageFilter
+    return matchesSearch && matchesAge
+  })
+
+  const exportAnalysis = (format: string) => {
+    const data = format === "morphometrics" ? morphometricsData : otolithAnalysisData
+    const fileName = format === "morphometrics" ? "morphometric_data" : "otolith_analysis"
+    
+    if (format === "csv") {
+      const csvData = otolithAnalysisData.map(item => 
+        `${item.fishId},${item.species},${item.age},${item.length},${item.weight},${item.growthRate},${item.location}`
+      ).join('\n')
+      const blob = new Blob([csvData], { type: 'text/csv' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${fileName}.csv`
+      a.click()
+    } else {
+      const json = JSON.stringify(data, null, 2)
+      const blob = new Blob([json], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${fileName}.json`
+      a.click()
+    }
+  }
+
   return (
     <div className="space-y-6">
+      {/* Ocean Animation Banner */}
+      <div className="relative h-32 w-full overflow-hidden rounded-xl mb-4 ocean-gradient">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg className="absolute w-full h-full animate-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C150,80 350,80 500,60 C650,40 850,40 1000,60 C1150,80 1200,80 1200,80 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.2)" />
+          </svg>
+          <div className="relative z-10 text-white text-center">
+            <h2 className="text-2xl font-bold flex items-center gap-2 justify-center">
+              <Fish className="h-6 w-6" />
+              Otolith Shape Analysis
+            </h2>
+            <p className="text-sm opacity-80">AI-powered fish age and species identification</p>
+          </div>
+        </div>
+        {/* Floating fish icons */}
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-float"
+            style={{
+              left: `${15 + i * 18}%`,
+              top: `${30 + (i % 2) * 20}%`,
+              animationDelay: `${i * 0.8}s`,
+              animationDuration: `${5 + Math.random() * 2}s`,
+            }}
+          >
+            <Fish className="h-4 w-4 text-white/40" />
+          </div>
+        ))}
+      </div>
+
       {/* Header Section */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-balance">Otolith Analysis Module</h1>
           <p className="text-muted-foreground text-pretty">
             AI-powered otolith shape analysis and morphometrics for species identification
           </p>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={autoAnalysis}
+              onCheckedChange={setAutoAnalysis}
+              id="auto-analysis"
+            />
+            <label htmlFor="auto-analysis" className="text-sm font-medium">
+              Auto Analysis
+            </label>
+          </div>
+          <Button 
+            variant="outline" 
+            onClick={runAgeAnalysis}
+            disabled={analysisStatus === "processing"}
+          >
+            {analysisStatus === "processing" ? <Zap className="mr-2 h-4 w-4 animate-pulse" /> : <Calculator className="mr-2 h-4 w-4" />}
+            {analysisStatus === "processing" ? "Analyzing..." : "Age Analysis"}
+          </Button>
           <Button variant="outline">
-            <FileImage className="mr-2 h-4 w-4" />
-            Batch Upload
+            <Camera className="mr-2 h-4 w-4" />
+            Capture Image
           </Button>
-          <Button>
-            <Download className="mr-2 h-4 w-4" />
-            Export Results
-          </Button>
+          <Select onValueChange={exportAnalysis}>
+            <SelectTrigger className="w-[180px]">
+              <Download className="mr-2 h-4 w-4" />
+              <SelectValue placeholder="Export Data" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="csv">Export as CSV</SelectItem>
+              <SelectItem value="analysis">Analysis Results</SelectItem>
+              <SelectItem value="morphometrics">Morphometric Data</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
+
+      {/* Analysis Controls */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Settings className="h-5 w-5" />
+            Analysis Configuration
+          </CardTitle>
+          <CardDescription>Configure otolith analysis parameters and filters</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search fish ID, species, or location..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            </div>
+            <Select value={ageFilter} onValueChange={setAgeFilter}>
+              <SelectTrigger className="w-[150px]">
+                <Filter className="mr-2 h-4 w-4" />
+                <SelectValue placeholder="Age Filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">All Ages</SelectItem>
+                <SelectItem value="1">1 Year</SelectItem>
+                <SelectItem value="2">2 Years</SelectItem>
+                <SelectItem value="3">3 Years</SelectItem>
+                <SelectItem value="4">4+ Years</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select value={measurementMode} onValueChange={(value: "manual" | "auto") => setMeasurementMode(value)}>
+              <SelectTrigger className="w-[150px]">
+                <Ruler className="mr-2 h-4 w-4" />
+                <SelectValue placeholder="Measurement" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="auto">Auto Measure</SelectItem>
+                <SelectItem value="manual">Manual Measure</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Analysis Results Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {filteredOtolithData.slice(0, 4).map((item, idx) => (
+          <Card key={idx} className="ocean-glass hover:scale-105 transition-all duration-300 cursor-pointer">
+            <CardContent className="p-4">
+              <div className="text-center">
+                <p className="text-sm font-medium text-blue-700 dark:text-blue-300">{item.fishId}</p>
+                <p className="text-lg font-bold">{item.species}</p>
+                <p className="text-xs text-muted-foreground">{item.location}</p>
+                <div className="grid grid-cols-2 gap-2 mt-2 text-xs">
+                  <span>Age: {item.age}y</span>
+                  <span>L: {item.length}cm</span>
+                  <span>W: {item.weight}g</span>
+                  <span>GR: {item.growthRate}</span>
+                </div>
+                <Badge 
+                  className="mt-2" 
+                  variant={item.age <= 2 ? "default" : item.age <= 4 ? "secondary" : "outline"}
+                >
+                  {item.age <= 2 ? "Young" : item.age <= 4 ? "Adult" : "Mature"}
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Species Database */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Fish className="h-5 w-5" />
+            Species Database
+          </CardTitle>
+          <CardDescription>Reference database for species identification</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {marineSpeciesData.map((species, idx) => (
+              <div key={idx} className="p-4 border rounded-lg hover:bg-muted/50">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="font-medium">{species.species}</h4>
+                  <Badge variant={species.status === "Stable" ? "default" : species.status === "Common" ? "secondary" : "destructive"}>
+                    {species.status}
+                  </Badge>
+                </div>
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <p><span className="font-medium">Scientific:</span> {species.scientificName}</p>
+                  <p><span className="font-medium">Habitat:</span> {species.habitat}</p>
+                  <p><span className="font-medium">Depth:</span> {species.depth}</p>
+                  <p><span className="font-medium">Distribution:</span> {species.distribution}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Upload Section */}
       <Card>

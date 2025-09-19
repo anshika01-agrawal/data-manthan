@@ -1,16 +1,9 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { salinityHeatmapData } from "@/lib/dummyData"
 
 export function SalinityHeatmap() {
-  const salinityGrid = [
-    [35.1, 35.2, 35.3, 35.4, 35.5],
-    [35.0, 35.1, 35.2, 35.3, 35.4],
-    [34.9, 35.0, 35.1, 35.2, 35.3],
-    [34.8, 34.9, 35.0, 35.1, 35.2],
-    [34.7, 34.8, 34.9, 35.0, 35.1],
-  ]
-
   const getColorIntensity = (value: number) => {
     const min = 34.7
     const max = 35.5
@@ -21,10 +14,10 @@ export function SalinityHeatmap() {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-5 gap-1 aspect-square">
-        {salinityGrid.flat().map((value, index) => (
+        {salinityHeatmapData.flat().map((value, index) => (
           <div
             key={index}
-            className="flex items-center justify-center text-xs font-medium rounded border"
+            className="flex items-center justify-center text-xs font-medium rounded border water-droplet hover:scale-110 transition-transform cursor-pointer"
             style={{ backgroundColor: getColorIntensity(value) }}
           >
             {value}

@@ -1,42 +1,251 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar, Download, Filter, Map, BarChart3, Activity } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import { Calendar, Download, Filter, Map, BarChart3, Activity, Waves, RefreshCw, Search, Settings } from "lucide-react"
 import { InteractiveOceanMap } from "@/components/interactive-ocean-map"
 import { TemperatureDepthChart } from "@/components/temperature-depth-chart"
 import { ChlorophyllTrendChart } from "@/components/chlorophyll-trend-chart"
 import { SalinityHeatmap } from "@/components/salinity-heatmap"
+import Image from "next/image"
+import { biodiversityData, oceanographicData, timeSeriesData, environmentalParameters, samplingLocations } from "@/lib/dummyData"
 
 export function DataVisualizationContent() {
+  const [selectedLocation, setSelectedLocation] = useState("all")
+  const [selectedParameter, setSelectedParameter] = useState("temperature")
+  const [dateRange, setDateRange] = useState("7d")
+  const [isRealTime, setIsRealTime] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [filterStatus, setFilterStatus] = useState("")
+
+  // Simulate real-time data updates
+  useEffect(() => {
+    if (isRealTime) {
+      const interval = setInterval(() => {
+        // This would typically fetch new data from an API
+        console.log("Fetching real-time data...")
+      }, 5000)
+      return () => clearInterval(interval)
+    }
+  }, [isRealTime])
+
+  const filteredBiodiversityData = biodiversityData.filter(item => {
+    const matchesSearch = item.species.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.location.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesStatus = !filterStatus || item.trend === filterStatus
+    return matchesSearch && matchesStatus
+  })
+
+  const exportData = (format: string) => {
+    if (format === "csv") {
+      // Convert data to CSV format
+      const csv = biodiversityData.map(item => 
+        `${item.species},${item.count},${item.location},${item.date},${item.trend}`
+      ).join('\n')
+      const blob = new Blob([csv], { type: 'text/csv' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'biodiversity_data.csv'
+      a.click()
+    } else if (format === "json") {
+      const json = JSON.stringify(biodiversityData, null, 2)
+      const blob = new Blob([json], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'biodiversity_data.json'
+      a.click()
+    }
+  }
   return (
     <div className="space-y-6">
+      {/* Ocean Animation Banner */}
+      <div className="relative h-32 w-full overflow-hidden rounded-xl mb-4 ocean-gradient">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <svg className="absolute w-full h-full animate-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C150,80 350,80 500,60 C650,40 850,40 1000,60 C1150,80 1200,80 1200,80 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.2)" />
+          </svg>
+          <div className="relative z-10 text-white text-center">
+            <h2 className="text-2xl font-bold flex items-center gap-2 justify-center">
+              <Waves className="h-6 w-6" />
+              Oceanographic Data Visualization
+            </h2>
+            <p className="text-sm opacity-80">Real-time marine ecosystem monitoring</p>
+          </div>
+        </div>
+        {/* Floating bubbles */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white/20 animate-bubble"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.7}s`,
+              animationDuration: `${6 + Math.random() * 4}s`,
+              width: `${3 + Math.random() * 6}px`,
+              height: `${3 + Math.random() * 6}px`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Header Section */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-balance">Data Visualization Dashboard</h1>
           <p className="text-muted-foreground text-pretty">
             Interactive visualization of oceanographic parameters and marine biodiversity data
           </p>
         </div>
-        <div className="flex space-x-2">
-          <Button variant="outline">
+        <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <Switch
+              checked={isRealTime}
+              onCheckedChange={setIsRealTime}
+              id="real-time"
+            />
+            <label htmlFor="real-time" className="text-sm font-medium">
+              Real-time {isRealTime && <RefreshCw className="inline h-3 w-3 animate-spin ml-1" />}
+            </label>
+          </div>
+          <Button variant="outline" className="water-droplet">
             <Calendar className="mr-2 h-4 w-4" />
             Date Range
           </Button>
-          <Button variant="outline">
-            <Filter className="mr-2 h-4 w-4" />
-            Filters
-          </Button>
-          <Button>
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
+          <Select value={filterStatus} onValueChange={setFilterStatus}>
+            <SelectTrigger className="w-[150px]">
+              <Filter className="mr-2 h-4 w-4" />
+              <SelectValue placeholder="Filter Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">All Status</SelectItem>
+              <SelectItem value="increasing">Increasing</SelectItem>
+              <SelectItem value="stable">Stable</SelectItem>
+              <SelectItem value="decreasing">Decreasing</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select onValueChange={exportData}>
+            <SelectTrigger className="w-[150px]">
+              <Download className="mr-2 h-4 w-4" />
+              <SelectValue placeholder="Export" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="csv">Export as CSV</SelectItem>
+              <SelectItem value="json">Export as JSON</SelectItem>
+              <SelectItem value="pdf">Generate Report</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
+
+      {/* Search and Filter Bar */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search species, locations, or parameters..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            </div>
+            <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+              <SelectTrigger className="w-[200px]">
+                <SelectValue placeholder="Select Location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Locations</SelectItem>
+                {samplingLocations.map((location) => (
+                  <SelectItem key={location.id} value={location.id}>
+                    {location.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={selectedParameter} onValueChange={setSelectedParameter}>
+              <SelectTrigger className="w-[200px]">
+                <SelectValue placeholder="Select Parameter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="temperature">Temperature</SelectItem>
+                <SelectItem value="salinity">Salinity</SelectItem>
+                <SelectItem value="chlorophyll">Chlorophyll</SelectItem>
+                <SelectItem value="biodiversity">Biodiversity</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Live Data Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {filteredBiodiversityData.slice(0, 4).map((item, idx) => (
+          <Card key={idx} className="ocean-glass hover:scale-105 transition-all duration-300 cursor-pointer">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-blue-700 dark:text-blue-300">{item.species}</p>
+                  <p className="text-2xl font-bold">{item.count}</p>
+                  <p className="text-xs text-muted-foreground">{item.location}</p>
+                  {item.coordinates && (
+                    <p className="text-xs text-muted-foreground">
+                      {item.coordinates.lat.toFixed(2)}, {item.coordinates.lng.toFixed(2)}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col items-end gap-1">
+                  <Badge variant={item.trend === "increasing" ? "default" : item.trend === "stable" ? "secondary" : "destructive"}>
+                    {item.trend}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">{item.date}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Environmental Parameters */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Activity className="h-5 w-5" />
+            Environmental Parameters
+          </CardTitle>
+          <CardDescription>Real-time monitoring of key ocean parameters</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {environmentalParameters.map((param, idx) => (
+              <div key={idx} className="p-4 border rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="font-medium">{param.parameter}</h4>
+                  <Badge variant={param.status === "Normal" || param.status === "Good" || param.status === "Optimal" ? "default" : "secondary"}>
+                    {param.status}
+                  </Badge>
+                </div>
+                <div className="text-2xl font-bold">
+                  {param.current} {param.unit}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Range: {param.min} - {param.max} {param.unit}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Control Panel */}
       <Card>
