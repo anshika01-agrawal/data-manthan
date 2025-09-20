@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves } from "lucide-react"
+import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -14,6 +14,7 @@ const menuItems = [
   { icon: Activity, label: "Ocean Analysis", href: "/oceanographic-analysis", active: false },
   { icon: Dna, label: "eDNA Processing", href: "/edna-processing", active: false },
   { icon: Fish, label: "Otolith Analysis", href: "/otolith-analysis", active: false },
+  { icon: Brain, label: "Fish Classification", href: "https://aqua-ai-omega.vercel.app", active: false, external: true },
 ]
 
 export function TopNavbar() {
@@ -27,8 +28,24 @@ export function TopNavbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-8">
             {menuItems.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = !item.external && pathname === item.href
               const Icon = item.icon
+              
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
+                  >
+                    <Icon className="mr-2 h-4 w-4" />
+                    {item.label}
+                  </a>
+                )
+              }
+              
               return (
                 <Link
                   key={item.href}
@@ -76,8 +93,25 @@ export function TopNavbar() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
               {menuItems.map((item) => {
-                const isActive = pathname === item.href
+                const isActive = !item.external && pathname === item.href
                 const Icon = item.icon
+                
+                if (item.external) {
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <Icon className="mr-3 h-5 w-5" />
+                      {item.label}
+                    </a>
+                  )
+                }
+                
                 return (
                   <Link
                     key={item.href}
