@@ -30,6 +30,7 @@ import {
 } from "lucide-react"
 
 export function IncoisDataPortal() {
+  // Updated component with dark transparent UI
   const [selectedDataset, setSelectedDataset] = useState("SST")
   const [selectedRegion, setSelectedRegion] = useState("arabian-sea")
   const [selectedDate, setSelectedDate] = useState("2025-09-19")
