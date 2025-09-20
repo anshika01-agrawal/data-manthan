@@ -11,9 +11,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "CMLRE Marine Research Platform",
+  title: "Data Manthan - Marine Research Platform",
   description: "AI-driven, unified, cloud-ready data platform for marine research",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({

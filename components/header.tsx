@@ -6,6 +6,7 @@ import { BackButton } from "@/components/back-button"
 import { Search, Bell, User, Waves, Fish, Droplets } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useState, useEffect } from "react"
+import Link from "next/link"
 
 export function Header() {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -59,15 +60,17 @@ export function Header() {
               <Waves className="h-6 w-6 text-white group-hover:scale-110 transition-transform duration-300" />
               <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-300 bg-clip-text text-transparent">
-                CMLRE
-              </h1>
-              <p className="text-sm text-cyan-200 flex items-center gap-1">
-                <Fish className="h-3 w-3" />
-                Marine Research Platform
-              </p>
-            </div>
+            <Link href="/">
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-300 bg-clip-text text-transparent hover:from-blue-400 hover:to-cyan-300 transition-all duration-300">
+                  Data Manthan
+                </h1>
+                <p className="text-sm text-cyan-200 flex items-center gap-1">
+                  <Fish className="h-3 w-3" />
+                  Marine Research Platform
+                </p>
+              </div>
+            </Link>
           </div>
           
           {/* Navigation controls */}
