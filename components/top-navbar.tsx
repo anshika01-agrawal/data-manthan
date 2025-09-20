@@ -29,6 +29,7 @@ const dropdownMenuItems = [
 export function TopNavbar() {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   return (
     <nav className="bg-slate-900/80 border-b border-cyan-500/20 sticky top-16 z-40 backdrop-blur-md">
@@ -59,20 +60,14 @@ export function TopNavbar() {
             
             {/* More dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
-                >
-                  <MoreHorizontal className="mr-2 h-4 w-4" />
-                  More
-                  <ChevronDown className="ml-1 h-3 w-3" />
-                </Button>
+              <DropdownMenuTrigger className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10 cursor-pointer border-0 bg-transparent">
+                <MoreHorizontal className="mr-2 h-4 w-4" />
+                More
+                <ChevronDown className="ml-1 h-3 w-3" />
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end" 
-                className="w-56 bg-slate-900/95 border-slate-700/50 backdrop-blur-lg"
+                className="w-56 bg-slate-900 border-slate-700 z-50"
               >
                 {dropdownMenuItems.map((item) => {
                   const isActive = !item.external && pathname === item.href
