@@ -30,6 +30,7 @@ import {
 } from "lucide-react"
 
 export function IncoisDataPortal() {
+  // Updated component with dark transparent UI
   const [selectedDataset, setSelectedDataset] = useState("SST")
   const [selectedRegion, setSelectedRegion] = useState("arabian-sea")
   const [selectedDate, setSelectedDate] = useState("2025-09-19")
@@ -67,16 +68,16 @@ export function IncoisDataPortal() {
   const Icon = currentDataset?.icon || Map
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div className="min-h-screen bg-transparent">
       {/* Header - INCOIS Style */}
-      <div className="bg-blue-900 text-white p-4">
+      <div className="bg-gradient-to-r from-blue-950/90 to-slate-900/90 text-white p-4 backdrop-blur-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img 
                 src="/placeholder-logo.png" 
                 alt="INCOIS Logo" 
-                className="h-12 w-12 rounded-full bg-white p-1"
+                className="h-12 w-12 rounded-full bg-white/10 p-1"
               />
               <div>
                 <h1 className="text-xl font-bold">INCOIS Live Access Server</h1>
@@ -93,8 +94,8 @@ export function IncoisDataPortal() {
 
       <div className="container mx-auto p-4 space-y-6">
         {/* Control Panel */}
-        <Card className="shadow-lg">
-          <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+        <Card className="shadow-lg bg-slate-900/80 backdrop-blur-sm border-slate-800">
+          <CardHeader className="bg-gradient-to-r from-slate-900 to-blue-900/90 text-white border-b border-slate-800">
             <CardTitle className="flex items-center">
               <Settings className="mr-2 h-5 w-5" />
               Data Selection & Analysis Controls
@@ -105,11 +106,11 @@ export function IncoisDataPortal() {
           </CardHeader>
           <CardContent className="p-6">
             <Tabs defaultValue="dataset" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="dataset">Dataset</TabsTrigger>
-                <TabsTrigger value="spatial">Spatial</TabsTrigger>
-                <TabsTrigger value="temporal">Temporal</TabsTrigger>
-                <TabsTrigger value="analysis">Analysis</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
+                <TabsTrigger value="dataset" className="data-[state=active]:bg-slate-700 data-[state=active]:text-white text-slate-300">Dataset</TabsTrigger>
+                <TabsTrigger value="spatial" className="data-[state=active]:bg-slate-700 data-[state=active]:text-white text-slate-300">Spatial</TabsTrigger>
+                <TabsTrigger value="temporal" className="data-[state=active]:bg-slate-700 data-[state=active]:text-white text-slate-300">Temporal</TabsTrigger>
+                <TabsTrigger value="analysis" className="data-[state=active]:bg-slate-700 data-[state=active]:text-white text-slate-300">Analysis</TabsTrigger>
               </TabsList>
 
               <TabsContent value="dataset" className="space-y-4">
@@ -119,17 +120,17 @@ export function IncoisDataPortal() {
                     return (
                       <Card 
                         key={dataset.id}
-                        className={`cursor-pointer transition-all hover:shadow-md ${
-                          selectedDataset === dataset.id ? 'ring-2 ring-blue-500 bg-blue-50' : ''
+                        className={`cursor-pointer transition-all hover:shadow-md bg-slate-900/90 border-slate-800 ${
+                          selectedDataset === dataset.id ? 'ring-2 ring-blue-500 bg-blue-900/90' : ''
                         }`}
                         onClick={() => setSelectedDataset(dataset.id)}
                       >
                         <CardContent className="p-4">
                           <div className="flex items-center space-x-3">
-                            <DatasetIcon className="h-8 w-8 text-blue-600" />
+                            <DatasetIcon className={`h-8 w-8 ${selectedDataset === dataset.id ? 'text-blue-400' : 'text-blue-600'}`} />
                             <div>
-                              <h3 className="font-medium">{dataset.name}</h3>
-                              <p className="text-sm text-muted-foreground">Unit: {dataset.unit}</p>
+                              <h3 className="font-medium text-white">{dataset.name}</h3>
+                              <p className="text-sm text-blue-300">Unit: {dataset.unit}</p>
                             </div>
                           </div>
                         </CardContent>
