@@ -1,13 +1,15 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain, Users, GitBranch } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain, Users, GitBranch, ChevronDown, MoreHorizontal } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
-const menuItems = [
+// Main navigation items (always visible)
+const mainMenuItems = [
   { icon: BarChart3, label: "Dashboard", href: "/", active: false },
   { icon: Waves, label: "Data Visualization", href: "/data-visualization", active: false },
   { icon: Database, label: "INCOIS Portal", href: "/incois-portal", active: false },
@@ -15,8 +17,13 @@ const menuItems = [
   { icon: Dna, label: "eDNA Processing", href: "/edna-processing", active: false },
   { icon: Fish, label: "Otolith Analysis", href: "/otolith-analysis", active: false },
   { icon: Users, label: "Community", href: "/community", active: false },
+]
+
+// Dropdown menu items (in "More" dropdown)
+const dropdownMenuItems = [
   { icon: GitBranch, label: "Collaboration", href: "/collaboration", active: false },
   { icon: Brain, label: "Fish Classification", href: "https://aqua-ai-omega.vercel.app", active: false, external: true },
+  { icon: Settings, label: "Settings", href: "#", active: false },
 ]
 
 export function TopNavbar() {
@@ -29,24 +36,10 @@ export function TopNavbar() {
         <div className="flex justify-between h-16">
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-8">
-            {menuItems.map((item) => {
-              const isActive = !item.external && pathname === item.href
+            {/* Main navigation items */}
+            {mainMenuItems.map((item) => {
+              const isActive = pathname === item.href
               const Icon = item.icon
-              
-              if (item.external) {
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
-                  >
-                    <Icon className="mr-2 h-4 w-4" />
-                    {item.label}
-                  </a>
-                )
-              }
               
               return (
                 <Link
@@ -63,6 +56,62 @@ export function TopNavbar() {
                 </Link>
               )
             })}
+            
+            {/* More dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
+                >
+                  <MoreHorizontal className="mr-2 h-4 w-4" />
+                  More
+                  <ChevronDown className="ml-1 h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="w-56 bg-slate-900/95 border-slate-700/50 backdrop-blur-lg"
+              >
+                {dropdownMenuItems.map((item) => {
+                  const isActive = !item.external && pathname === item.href
+                  const Icon = item.icon
+                  
+                  return (
+                    <DropdownMenuItem key={item.label} asChild>
+                      {item.external ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`flex items-center w-full px-3 py-2 transition-colors ${
+                            isActive
+                              ? "bg-cyan-500/20 text-cyan-300"
+                              : "text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
+                          }`}
+                        >
+                          <Icon className="mr-2 h-4 w-4" />
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={`flex items-center w-full px-3 py-2 transition-colors ${
+                            isActive
+                              ? "bg-cyan-500/20 text-cyan-300"
+                              : "text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
+                          }`}
+                        >
+                          <Icon className="mr-2 h-4 w-4" />
+                          {item.label}
+                        </Link>
+                      )}
+                    </DropdownMenuItem>
+                  )
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile menu button */}
@@ -81,12 +130,9 @@ export function TopNavbar() {
             </Button>
           </div>
 
-          {/* Desktop right side */}
+          {/* Desktop right side - removed Settings since it's now in dropdown */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            <Button variant="outline" size="sm">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
-            </Button>
+            {/* Space for future desktop-only features */}
           </div>
         </div>
 
@@ -94,25 +140,10 @@ export function TopNavbar() {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t">
-              {menuItems.map((item) => {
-                const isActive = !item.external && pathname === item.href
+              {/* Main menu items */}
+              {mainMenuItems.map((item) => {
+                const isActive = pathname === item.href
                 const Icon = item.icon
-                
-                if (item.external) {
-                  return (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <Icon className="mr-3 h-5 w-5" />
-                      {item.label}
-                    </a>
-                  )
-                }
                 
                 return (
                   <Link
@@ -130,11 +161,45 @@ export function TopNavbar() {
                   </Link>
                 )
               })}
-              <div className="pt-4 border-t border-border">
-                <Button variant="outline" size="sm" className="w-full justify-start">
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings
-                </Button>
+              
+              {/* Dropdown items in mobile */}
+              <div className="pt-2 border-t border-border">
+                {dropdownMenuItems.map((item) => {
+                  const isActive = !item.external && pathname === item.href
+                  const Icon = item.icon
+                  
+                  if (item.external) {
+                    return (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Icon className="mr-3 h-5 w-5" />
+                        {item.label}
+                      </a>
+                    )
+                  }
+                  
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                        isActive
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <Icon className="mr-3 h-5 w-5" />
+                      {item.label}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </div>

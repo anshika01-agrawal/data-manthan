@@ -28,7 +28,9 @@ import {
   PlayCircle,
   Pause,
   Download,
-  Share2
+  Share2,
+  Brain,
+  TrendingUp
 } from "lucide-react"
 
 interface Project {
