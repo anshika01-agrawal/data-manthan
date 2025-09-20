@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain } from "lucide-react"
+import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain, Users, GitBranch } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
@@ -14,6 +14,8 @@ const menuItems = [
   { icon: Activity, label: "Ocean Analysis", href: "/oceanographic-analysis", active: false },
   { icon: Dna, label: "eDNA Processing", href: "/edna-processing", active: false },
   { icon: Fish, label: "Otolith Analysis", href: "/otolith-analysis", active: false },
+  { icon: Users, label: "Community", href: "/community", active: false },
+  { icon: GitBranch, label: "Collaboration", href: "/collaboration", active: false },
   { icon: Brain, label: "Fish Classification", href: "https://aqua-ai-omega.vercel.app", active: false, external: true },
 ]
 
