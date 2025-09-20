@@ -18,6 +18,7 @@ import { BiodiversityMetrics } from "@/components/biodiversity-metrics"
 import { SequenceViewer } from "@/components/sequence-viewer"
 import Image from "next/image"
 import { ednaProcessingData, geneticSequenceData, marineSpeciesData } from "@/lib/dummyData"
+import { simulateGeneticAnalysis, enhancedGeneticSequences, calculateBiodiversityIndices, ednaPipelineStages, generateRandomDNASequence } from "@/lib/marineGenetics"
 
 export function EdnaProcessingContent() {
   const [processingStage, setProcessingStage] = useState<"upload" | "processing" | "complete">("upload")
@@ -26,7 +27,7 @@ export function EdnaProcessingContent() {
   const [pipelineStep, setPipelineStep] = useState(1)
   const [isProcessing, setIsProcessing] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
-  const [qualityFilter, setQualityFilter] = useState("")
+  const [qualityFilter, setQualityFilter] = useState("all")
   const [realTimeSequencing, setRealTimeSequencing] = useState(false)
   const [liveSequenceData, setLiveSequenceData] = useState<any>(null)
   const [sequencingProgress, setSequencingProgress] = useState(0)
@@ -271,7 +272,7 @@ export function EdnaProcessingContent() {
                 <SelectValue placeholder="Quality Filter" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Quality</SelectItem>
+                <SelectItem value="all">All Quality</SelectItem>
                 <SelectItem value="95">95%+ Quality</SelectItem>
                 <SelectItem value="90">90%+ Quality</SelectItem>
                 <SelectItem value="85">85%+ Quality</SelectItem>

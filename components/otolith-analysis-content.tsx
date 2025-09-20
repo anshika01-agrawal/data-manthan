@@ -17,6 +17,7 @@ import { MorphometricsChart } from "@/components/morphometrics-chart"
 import { SpeciesClassification } from "@/components/species-classification"
 import Image from "next/image"
 import { otolithAnalysisData, morphometricsData, marineSpeciesData } from "@/lib/dummyData"
+import { fishPopulationModel } from "@/lib/marineGenetics"
 
 export function OtolithAnalysisContent() {
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -24,7 +25,7 @@ export function OtolithAnalysisContent() {
   const [selectedFish, setSelectedFish] = useState("")
   const [measurementMode, setMeasurementMode] = useState<"manual" | "auto">("auto")
   const [searchTerm, setSearchTerm] = useState("")
-  const [ageFilter, setAgeFilter] = useState("")
+  const [ageFilter, setAgeFilter] = useState("all")
   const [autoAnalysis, setAutoAnalysis] = useState(true)
   const [realTimeMonitoring, setRealTimeMonitoring] = useState(false)
   const [liveAnalysisData, setLiveAnalysisData] = useState<any>(null)
@@ -282,7 +283,7 @@ export function OtolithAnalysisContent() {
                 <SelectValue placeholder="Age Filter" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Ages</SelectItem>
+                <SelectItem value="all">All Ages</SelectItem>
                 <SelectItem value="1">1 Year</SelectItem>
                 <SelectItem value="2">2 Years</SelectItem>
                 <SelectItem value="3">3 Years</SelectItem>
