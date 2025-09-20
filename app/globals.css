@@ -5,24 +5,24 @@
 
 :root {
   /* Ocean-themed color tokens for marine research platform */
-  --background: #fafbfc;
-  --foreground: #1e293b;
-  --card: #ffffff;
-  --card-foreground: #1e293b;
-  --popover: #ffffff;
-  --popover-foreground: #1e293b;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: rgba(15, 23, 42, 0.85);
+  --card-foreground: #ffffff;
+  --popover: rgba(15, 23, 42, 0.95);
+  --popover-foreground: #ffffff;
   --primary: #0ea5e9;
   --primary-foreground: #ffffff;
   --secondary: #0284c7;
   --secondary-foreground: #ffffff;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted: rgba(30, 41, 59, 0.8);
+  --muted-foreground: #94a3b8;
   --accent: #38bdf8;
-  --accent-foreground: #0f172a;
+  --accent-foreground: #000000;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #ffffff;
+  --border: rgba(59, 130, 246, 0.3);
+  --input: rgba(15, 23, 42, 0.9);
   --ring: #0ea5e9;
   --chart-1: #0ea5e9;
   --chart-2: #22c55e;
@@ -30,13 +30,13 @@
   --chart-4: #ef4444;
   --chart-5: #8b5cf6;
   --radius: 0.75rem;
-  --sidebar: #f8fafc;
-  --sidebar-foreground: #1e293b;
+  --sidebar: rgba(15, 23, 42, 0.9);
+  --sidebar-foreground: #ffffff;
   --sidebar-primary: #0ea5e9;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #38bdf8;
-  --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #e2e8f0;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: rgba(59, 130, 246, 0.3);
   --sidebar-ring: #0ea5e9;
   
   /* Ocean animation variables */
@@ -46,7 +46,63 @@
   --ocean-dark: #0284c7;
 }
 
+/* Underwater Background */
+body {
+  background: #000000 url('/images/underwater-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(6, 182, 212, 0.1) 25%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(6, 182, 212, 0.1) 75%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: -1;
+  animation: underwater-glow 8s ease-in-out infinite;
+}
+
 /* Custom Ocean Animations */
+@keyframes underwater-glow {
+  0%, 100% { 
+    background: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(6, 182, 212, 0.1) 25%,
+      rgba(59, 130, 246, 0.1) 50%,
+      rgba(6, 182, 212, 0.1) 75%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+  }
+  50% { 
+    background: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(6, 182, 212, 0.2) 25%,
+      rgba(59, 130, 246, 0.2) 50%,
+      rgba(6, 182, 212, 0.2) 75%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(-5px) rotate(-1deg); }
+}
+
 @keyframes wave {
   0%, 100% {
     transform: translateX(0%);
@@ -124,7 +180,79 @@
 }
 
 .animate-float {
-  animation: float ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: underwater-glow 4s ease-in-out infinite;
+}
+
+/* Sliding content overlay */
+.slide-content {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slide-up 0.8s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom animation delays for staggered effects */
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+/* Underwater particle effects */
+.underwater-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  animation: float-particle 15s linear infinite;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(100vh) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 /* Loading spinner for ocean theme */
