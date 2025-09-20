@@ -4,10 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Ocean-themed color tokens for marine research platform */
+  /* Ocean-themed dark color tokens - forced dark theme only */
   --background: #000000;
   --foreground: #ffffff;
-  --card: rgba(15, 23, 42, 0.85);
+  --card: rgba(15, 23, 42, 0.8);
   --card-foreground: #ffffff;
   --popover: rgba(15, 23, 42, 0.95);
   --popover-foreground: #ffffff;
@@ -15,14 +15,14 @@
   --primary-foreground: #ffffff;
   --secondary: #0284c7;
   --secondary-foreground: #ffffff;
-  --muted: rgba(30, 41, 59, 0.8);
+  --muted: rgba(30, 41, 59, 0.7);
   --muted-foreground: #94a3b8;
   --accent: #38bdf8;
   --accent-foreground: #000000;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(59, 130, 246, 0.3);
-  --input: rgba(15, 23, 42, 0.9);
+  --border: rgba(59, 130, 246, 0.2);
+  --input: rgba(15, 23, 42, 0.8);
   --ring: #0ea5e9;
   --chart-1: #0ea5e9;
   --chart-2: #22c55e;
@@ -36,7 +36,7 @@
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #38bdf8;
   --sidebar-accent-foreground: #000000;
-  --sidebar-border: rgba(59, 130, 246, 0.3);
+  --sidebar-border: rgba(59, 130, 246, 0.2);
   --sidebar-ring: #0ea5e9;
   
   /* Ocean animation variables */
@@ -44,6 +44,16 @@
   --ocean-secondary: #38bdf8;
   --ocean-light: #bae6fd;
   --ocean-dark: #0284c7;
+}
+
+/* Force dark theme on html and body */
+html {
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* Underwater Background */
@@ -268,30 +278,107 @@ body::before {
   100% { transform: rotate(360deg); }
 }
 
-.dark {
-  --background: #0c1117;
-  --foreground: #e2e8f0;
-  --card: #1e293b;
-  --card-foreground: #e2e8f0;
-  --popover: #1e293b;
-  --popover-foreground: #e2e8f0;
-  --primary: #0ea5e9;
-  --primary-foreground: #0f172a;
-  --secondary: #0284c7;
-  --secondary-foreground: #f1f5f9;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
-  --accent: #38bdf8;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #f1f5f9;
-  --border: #334155;
-  --input: #1e293b;
-  --ring: #0ea5e9;
-  --chart-1: #0ea5e9;
-  --chart-2: #22c55e;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
+/* Override white backgrounds for underwater theme */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.5) transparent;
+}
+
+/* Force dark theme for all components */
+.bg-white,
+.bg-card,
+[data-theme="light"] .bg-white,
+[data-theme="light"] .bg-card {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Card styling overrides */
+.card,
+[role="dialog"],
+.popover,
+.dropdown-menu,
+.select-content {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* Input and form overrides */
+input,
+textarea,
+select,
+.input {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  color: #ffffff !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(148, 163, 184, 0.8) !important;
+}
+
+/* Button styling to maintain theme */
+.btn,
+button:not(.start-now-button) {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  color: #ffffff !important;
+}
+
+/* Ensure text readability */
+.text-black,
+.text-gray-900,
+.text-slate-900 {
+  color: #ffffff !important;
+}
+
+/* Chart and visualization containers */
+.recharts-wrapper,
+.chart-container {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+}
+
+/* Table styling */
+.table,
+table {
+  background: rgba(15, 23, 42, 0.7) !important;
+  color: #ffffff !important;
+/* Accordion and collapsible content */
+.accordion-content,
+.collapsible-content {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Force dark theme styles globally */
+* {
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Ensure all text inputs and selects have dark theme */
+input, select, textarea {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  color: #ffffff !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Button styling for dark theme */
+button {
+  color: #ffffff;
+}
+
+/* Card and dialog dark theme enforcement */
+.card, [role="dialog"], .popover {
+  background: rgba(15, 23, 42, 0.8) !important;
+  color: #ffffff !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
+} --chart-4: #ef4444;
   --chart-5: #8b5cf6;
   --sidebar: #1e293b;
   --sidebar-foreground: #e2e8f0;

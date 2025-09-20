@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+    <html lang="en" className={`dark ${inter.variable}`}>
+      <body className="antialiased dark">
+        <ThemeProvider>
           <NavigationHistoryProvider>
             {children}
           </NavigationHistoryProvider>

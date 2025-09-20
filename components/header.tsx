@@ -16,9 +16,9 @@ export function Header() {
   }, [])
 
   return (
-    <header className="relative border-b bg-gradient-to-r from-blue-50/80 via-cyan-50/60 to-blue-50/80 dark:from-blue-950/30 dark:via-cyan-950/20 dark:to-blue-950/30 backdrop-blur supports-[backdrop-filter]:bg-card/50 overflow-hidden">
+    <header className="relative border-b border-cyan-500/20 bg-gradient-to-r from-slate-900/80 via-blue-900/60 to-slate-900/80 backdrop-blur supports-[backdrop-filter]:bg-card/50 overflow-hidden">
       {/* Animated wave background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-30">
         <svg className="absolute w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path
             d="M0,0 C150,80 350,80 500,60 C650,40 850,40 1000,60 C1150,80 1200,80 1200,80 L1200,120 L0,120 Z"
@@ -27,7 +27,7 @@ export function Header() {
           />
           <defs>
             <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.4" />
               <stop offset="50%" stopColor="rgb(34, 197, 94)" stopOpacity="0.2" />
               <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.3" />
             </linearGradient>
@@ -60,10 +60,10 @@ export function Header() {
               <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-700 to-cyan-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-cyan-300">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-300 bg-clip-text text-transparent">
                 CMLRE
               </h1>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
+              <p className="text-sm text-cyan-200 flex items-center gap-1">
                 <Fish className="h-3 w-3" />
                 Marine Research Platform
               </p>

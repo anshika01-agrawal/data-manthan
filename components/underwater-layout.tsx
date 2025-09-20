@@ -13,7 +13,8 @@ export function SlidingContent({ children, className, delay = 0 }: SlidingConten
   return (
     <div 
       className={cn(
-        "slide-content rounded-lg p-6 m-4",
+        "slide-content rounded-lg p-6 m-4 text-white",
+        "border border-cyan-500/20 shadow-lg shadow-cyan-500/10",
         className
       )}
       style={{ animationDelay: `${delay}ms` }}

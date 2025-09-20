@@ -21,7 +21,7 @@ export function TopNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="bg-background border-b border-border sticky top-16 z-40">
+    <nav className="bg-slate-900/80 border-b border-cyan-500/20 sticky top-16 z-40 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Desktop Navigation */}
@@ -35,8 +35,8 @@ export function TopNavbar() {
                   href={item.href}
                   className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     isActive
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                      : "text-cyan-100 hover:text-cyan-300 hover:bg-cyan-500/10"
                   }`}
                 >
                   <Icon className="mr-2 h-4 w-4" />
