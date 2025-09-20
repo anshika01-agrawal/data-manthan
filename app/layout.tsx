@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavigationHistoryProvider } from "@/hooks/use-navigation-history"
+import { ChatbotIframe } from "@/components/chatbot-iframe"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,6 +28,7 @@ export default function RootLayout({
         <ThemeProvider>
           <NavigationHistoryProvider>
             {children}
+            <ChatbotIframe />
           </NavigationHistoryProvider>
         </ThemeProvider>
       </body>
