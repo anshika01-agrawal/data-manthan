@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { NavigationHistoryProvider } from "@/hooks/use-navigation-history"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable}`}>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
+          <NavigationHistoryProvider>
+            {children}
+          </NavigationHistoryProvider>
         </ThemeProvider>
       </body>
     </html>

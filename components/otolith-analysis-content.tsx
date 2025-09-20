@@ -26,6 +26,90 @@ export function OtolithAnalysisContent() {
   const [searchTerm, setSearchTerm] = useState("")
   const [ageFilter, setAgeFilter] = useState("")
   const [autoAnalysis, setAutoAnalysis] = useState(true)
+  const [realTimeMonitoring, setRealTimeMonitoring] = useState(false)
+  const [liveAnalysisData, setLiveAnalysisData] = useState<any>(null)
+  const [aiProcessing, setAiProcessing] = useState(false)
+
+  // Fetch real-time fish population and otolith data
+  const fetchLiveAnalysisData = async () => {
+    setAiProcessing(true)
+    try {
+      // Simulated real-time fish monitoring data
+      const currentTime = new Date()
+      const simulatedData = {
+        totalFishAnalyzed: Math.floor(Math.random() * 500) + 200,
+        averageAge: 3.2 + Math.random() * 2.8,
+        growthRate: 0.8 + Math.random() * 0.4,
+        populationHealth: 85 + Math.random() * 10,
+        lastUpdate: currentTime.toISOString(),
+        recentAnalyses: [
+          {
+            fishId: `FISH-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`,
+            species: "Gadus morhua",
+            estimatedAge: Math.floor(Math.random() * 8) + 2,
+            length: 35 + Math.random() * 40,
+            weight: 500 + Math.random() * 2000,
+            confidence: 92 + Math.random() * 7,
+            timestamp: new Date(currentTime.getTime() - Math.random() * 3600000).toISOString()
+          },
+          {
+            fishId: `FISH-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`,
+            species: "Pleuronectes platessa",
+            estimatedAge: Math.floor(Math.random() * 6) + 1,
+            length: 25 + Math.random() * 30,
+            weight: 200 + Math.random() * 800,
+            confidence: 88 + Math.random() * 10,
+            timestamp: new Date(currentTime.getTime() - Math.random() * 3600000).toISOString()
+          },
+          {
+            fishId: `FISH-${Math.floor(Math.random() * 9999).toString().padStart(4, '0')}`,
+            species: "Salmo salar",
+            estimatedAge: Math.floor(Math.random() * 5) + 3,
+            length: 45 + Math.random() * 35,
+            weight: 800 + Math.random() * 1500,
+            confidence: 95 + Math.random() * 4,
+            timestamp: new Date(currentTime.getTime() - Math.random() * 3600000).toISOString()
+          }
+        ],
+        stockAssessment: {
+          juveniles: Math.floor(Math.random() * 40) + 20, // %
+          adults: Math.floor(Math.random() * 50) + 40, // %
+          spawning: Math.floor(Math.random() * 20) + 10, // %
+        },
+        environmentalFactors: {
+          waterTemp: 8 + Math.random() * 12,
+          depth: Math.floor(Math.random() * 150) + 50,
+          season: ["Spring", "Summer", "Autumn", "Winter"][Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 90)) % 4],
+          fishingPressure: Math.random() * 100
+        },
+        aiModelStats: {
+          accuracy: 92 + Math.random() * 6,
+          processingTime: 0.5 + Math.random() * 1.5,
+          totalPredictions: Math.floor(Math.random() * 10000) + 5000,
+          modelVersion: "v2.1.3"
+        }
+      }
+
+      setLiveAnalysisData(simulatedData)
+    } catch (error) {
+      console.error('Error fetching live analysis data:', error)
+    } finally {
+      setAiProcessing(false)
+    }
+  }
+
+  // Real-time monitoring effect
+  useEffect(() => {
+    if (realTimeMonitoring) {
+      fetchLiveAnalysisData()
+      
+      const interval = setInterval(() => {
+        fetchLiveAnalysisData()
+      }, 15000) // Update every 15 seconds
+      
+      return () => clearInterval(interval)
+    }
+  }, [realTimeMonitoring])
 
   const handleFileUpload = () => {
     setAnalysisStatus("processing")
@@ -126,6 +210,16 @@ export function OtolithAnalysisContent() {
         <div className="flex flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <Switch
+              checked={realTimeMonitoring}
+              onCheckedChange={setRealTimeMonitoring}
+              id="real-time-monitoring"
+            />
+            <label htmlFor="real-time-monitoring" className="text-sm font-medium">
+              Live Monitoring {realTimeMonitoring && <Eye className="inline h-3 w-3 text-blue-500 ml-1" />}
+            </label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch
               checked={autoAnalysis}
               onCheckedChange={setAutoAnalysis}
               id="auto-analysis"
@@ -208,6 +302,148 @@ export function OtolithAnalysisContent() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Real-Time Fish Population Monitoring */}
+      {realTimeMonitoring && liveAnalysisData && (
+        <Card className="border-2 border-blue-500/50 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/50 dark:to-indigo-950/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Eye className="h-5 w-5 text-blue-600" />
+              Live Fish Population Analysis
+              {aiProcessing && <Zap className="h-4 w-4 animate-pulse text-yellow-500" />}
+            </CardTitle>
+            <CardDescription>
+              Real-time AI-powered otolith analysis and population assessment
+              <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                AI Model {liveAnalysisData.aiModelStats.modelVersion} - {liveAnalysisData.aiModelStats.accuracy.toFixed(1)}% accuracy
+              </span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="text-center p-3 bg-white/50 rounded-lg">
+                <div className="text-sm text-muted-foreground">Fish Analyzed</div>
+                <div className="text-2xl font-bold text-blue-600">
+                  {liveAnalysisData.totalFishAnalyzed}
+                </div>
+              </div>
+              <div className="text-center p-3 bg-white/50 rounded-lg">
+                <div className="text-sm text-muted-foreground">Avg Age</div>
+                <div className="text-2xl font-bold text-green-600">
+                  {liveAnalysisData.averageAge.toFixed(1)}y
+                </div>
+              </div>
+              <div className="text-center p-3 bg-white/50 rounded-lg">
+                <div className="text-sm text-muted-foreground">Growth Rate</div>
+                <div className="text-2xl font-bold text-purple-600">
+                  {liveAnalysisData.growthRate.toFixed(2)}
+                </div>
+              </div>
+              <div className="text-center p-3 bg-white/50 rounded-lg">
+                <div className="text-sm text-muted-foreground">Population Health</div>
+                <div className="text-2xl font-bold text-emerald-600">
+                  {liveAnalysisData.populationHealth.toFixed(0)}%
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <div>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <Microscope className="h-4 w-4" />
+                  Recent AI Analysis Results
+                </h4>
+                <div className="space-y-2">
+                  {liveAnalysisData.recentAnalyses.map((analysis: any, idx: number) => (
+                    <div key={idx} className="flex items-center justify-between p-3 bg-white/50 rounded-lg">
+                      <div>
+                        <div className="font-medium text-sm">{analysis.fishId}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {analysis.species}
+                        </div>
+                        <div className="text-xs">
+                          Age: {analysis.estimatedAge}y | L: {analysis.length.toFixed(0)}cm | W: {analysis.weight.toFixed(0)}g
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-medium text-blue-600">
+                          {analysis.confidence.toFixed(0)}% conf.
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {new Date(analysis.timestamp).toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-3 flex items-center gap-2">
+                  <BarChart3 className="h-4 w-4" />
+                  Population Structure
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Juveniles (&lt;2y)</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-20 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-green-500 h-2 rounded-full" 
+                          style={{width: `${liveAnalysisData.stockAssessment.juveniles}%`}}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-medium">{liveAnalysisData.stockAssessment.juveniles}%</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Adults (2-5y)</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-20 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-blue-500 h-2 rounded-full" 
+                          style={{width: `${liveAnalysisData.stockAssessment.adults}%`}}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-medium">{liveAnalysisData.stockAssessment.adults}%</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Spawning (&gt;5y)</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-20 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-purple-500 h-2 rounded-full" 
+                          style={{width: `${liveAnalysisData.stockAssessment.spawning}%`}}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-medium">{liveAnalysisData.stockAssessment.spawning}%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t">
+                  <h5 className="font-medium text-sm mb-2">Environmental Conditions</h5>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div>Water Temp: {liveAnalysisData.environmentalFactors.waterTemp.toFixed(1)}°C</div>
+                    <div>Depth: {liveAnalysisData.environmentalFactors.depth}m</div>
+                    <div>Season: {liveAnalysisData.environmentalFactors.season}</div>
+                    <div>Pressure: {liveAnalysisData.environmentalFactors.fishingPressure.toFixed(0)}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t text-center">
+              <div className="text-xs text-muted-foreground">
+                AI Processing Time: {liveAnalysisData.aiModelStats.processingTime.toFixed(1)}s avg | 
+                Total Predictions: {liveAnalysisData.aiModelStats.totalPredictions.toLocaleString()} | 
+                Last Updated: {new Date(liveAnalysisData.lastUpdate).toLocaleTimeString()}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Analysis Results Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

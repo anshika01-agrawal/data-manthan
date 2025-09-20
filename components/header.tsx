@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
+import { BackButton } from "@/components/back-button"
 import { Search, Bell, User, Waves, Fish, Droplets } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { useState, useEffect } from "react"
@@ -67,6 +68,11 @@ export function Header() {
                 Marine Research Platform
               </p>
             </div>
+          </div>
+          
+          {/* Navigation controls */}
+          <div className="ml-6">
+            <BackButton />
           </div>
         </div>
 
