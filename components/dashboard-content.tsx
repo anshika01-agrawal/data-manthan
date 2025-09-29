@@ -45,52 +45,55 @@ export function DashboardContent() {
         ))}
       </div>
 
-      {/* Header Section */}
-            {/* Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Research Dashboard</h2>
-          <p className="text-muted-foreground">Real-time marine data monitoring and analysis platform</p>
-        </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3">
-          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-            <Activity className="mr-1 h-3 w-3" />
-            System Active
-          </Badge>
-          <Button variant="outline" size="sm" className="w-full sm:w-auto">
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Refresh Data
-          </Button>
-          <Button size="sm" className="w-full sm:w-auto">
-            <Download className="mr-2 h-4 w-4" />
-            Export Report
-          </Button>
+      {/* Header Section - Mobile Optimized */}
+      <div className="mobile-section">
+        <div className="flex flex-col gap-4">
+          <div className="text-center md:text-left">
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight mobile-section-title">Research Dashboard</h2>
+            <p className="text-sm md:text-base text-muted-foreground">Real-time marine data monitoring and analysis</p>
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 tap-highlight">
+              <Activity className="mr-1 h-3 w-3" />
+              System Active
+            </Badge>
+            <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+              <Button variant="outline" size="sm" className="btn-mobile md:w-auto tap-highlight">
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Refresh Data
+              </Button>
+              <Button size="sm" className="btn-mobile md:w-auto tap-highlight">
+                <Download className="mr-2 h-4 w-4" />
+                Export Report
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="ocean-glass hover:scale-105 transition-all duration-300">
+      {/* Key Metrics - Mobile Optimized */}
+      <div className="grid mobile-grid-cards md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mobile-content">
+        <Card className="ocean-glass hover:scale-105 transition-all duration-300 card-mobile tap-highlight">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Species Recorded</CardTitle>
-            <Fish className="h-4 w-4 text-blue-600" />
+            <CardTitle className="text-sm md:text-base font-medium">Species Recorded</CardTitle>
+            <Fish className="h-5 w-5 md:h-4 md:w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{biodiversityData.reduce((acc, item) => acc + item.count, 0)}</div>
-            <p className="text-xs text-muted-foreground">+12% from last month</p>
+            <div className="text-xl md:text-2xl font-bold">{biodiversityData.reduce((acc, item) => acc + item.count, 0)}</div>
+            <p className="text-xs md:text-sm text-muted-foreground">+12% from last month</p>
             <Progress value={75} className="mt-2" />
           </CardContent>
         </Card>
 
-        <Card className="ocean-glass hover:scale-105 transition-all duration-300">
+        <Card className="ocean-glass hover:scale-105 transition-all duration-300 card-mobile tap-highlight">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">eDNA Samples</CardTitle>
-            <Dna className="h-4 w-4 text-cyan-600" />
+            <CardTitle className="text-sm md:text-base font-medium">eDNA Samples</CardTitle>
+            <Dna className="h-5 w-5 md:h-4 md:w-4 text-cyan-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{ednaProcessingData.length}</div>
-            <p className="text-xs text-muted-foreground">
-              Average quality: {Math.round(ednaProcessingData.reduce((acc, item) => acc + item.quality, 0) / ednaProcessingData.length)}%
+            <div className="text-xl md:text-2xl font-bold">{ednaProcessingData.length}</div>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              Avg quality: {Math.round(ednaProcessingData.reduce((acc, item) => acc + item.quality, 0) / ednaProcessingData.length)}%
             </p>
             <Progress value={92} className="mt-2" />
           </CardContent>
