@@ -10,24 +10,34 @@ export function ChlorophyllTrendChart() {
       config={{
         chlorophyll: {
           label: "Chlorophyll-a",
-          color: "hsl(var(--chart-2))",
+          color: "#00ff88",
         },
       }}
-      className="h-[300px]"
+      className="h-[250px] md:h-[300px] chart-mobile-small"
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chlorophyllTrendData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis label={{ value: "Chlorophyll-a (mg/m³)", angle: -90, position: "insideLeft" }} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+          <XAxis 
+            dataKey="month" 
+            tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+            axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+            tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+          />
+          <YAxis 
+            label={{ value: "Chlorophyll-a (mg/m³)", angle: -90, position: "insideLeft", style: { textAnchor: 'middle', fill: 'rgba(255, 255, 255, 0.8)' } }}
+            tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+            axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+            tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+          />
           <ChartTooltip content={<ChartTooltipContent />} />
           <Area
             type="monotone"
             dataKey="chlorophyll"
-            stroke="var(--color-chart-2)"
-            fill="var(--color-chart-2)"
-            fillOpacity={0.3}
-            strokeWidth={2}
+            stroke="#00ff88"
+            fill="#00ff88"
+            fillOpacity={0.2}
+            strokeWidth={3}
           />
         </AreaChart>
       </ResponsiveContainer>

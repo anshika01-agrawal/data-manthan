@@ -224,11 +224,11 @@ export async function getRecentOceanographicData(limit: number = 50) {
       .limit(limit)
       .lean()
     
-    return data.map(record => ({
-      id: record._id.toString(),
+    return data.map((record: any) => ({
+      id: record._id?.toString() || 'unknown',
       stationId: record.stationId,
       location: record.location,
-      date: record.measurementDate.toISOString().split('T')[0],
+      date: record.measurementDate?.toISOString().split('T')[0] || new Date().toISOString().split('T')[0],
       temperature: record.temperature,
       salinity: record.salinity,
       chlorophyll: record.chlorophyll,

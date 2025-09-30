@@ -223,34 +223,57 @@ export function OceanographicAnalysis() {
               <CardContent>
                 <ChartContainer
                   config={{
-                    temp: { label: "Temperature (°C)", color: "hsl(var(--chart-1))" },
-                    salinity: { label: "Salinity (PSU)", color: "hsl(var(--chart-2))" },
+                    temp: { label: "Temperature (°C)", color: "#00d4ff" },
+                    salinity: { label: "Salinity (PSU)", color: "#00ff88" },
                   }}
-                  className="h-80"
+                  className="h-80 chart-mobile-small"
                 >
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={realtimeOceanData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="time" />
-                      <YAxis yAxisId="left" orientation="left" />
-                      <YAxis yAxisId="right" orientation="right" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                      <XAxis 
+                        dataKey="time" 
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
+                      <YAxis 
+                        yAxisId="left" 
+                        orientation="left"
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
+                      <YAxis 
+                        yAxisId="right" 
+                        orientation="right"
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
                       <ChartTooltip content={<ChartTooltipContent />} />
-                      <Legend />
+                      <Legend 
+                        wrapperStyle={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                      />
                       <Line 
                         yAxisId="left"
                         type="monotone" 
                         dataKey="temp" 
-                        stroke="var(--color-chart-1)" 
-                        strokeWidth={2}
+                        stroke="#00d4ff" 
+                        strokeWidth={3}
                         name="Temperature (°C)"
+                        dot={{ fill: "#00d4ff", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                        activeDot={{ r: 6, fill: '#00d4ff', stroke: '#ffffff', strokeWidth: 2 }}
                       />
                       <Line 
                         yAxisId="right"
                         type="monotone" 
                         dataKey="salinity" 
-                        stroke="var(--color-chart-2)" 
-                        strokeWidth={2}
+                        stroke="#00ff88" 
+                        strokeWidth={3}
                         name="Salinity (PSU)"
+                        dot={{ fill: "#00ff88", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                        activeDot={{ r: 6, fill: '#00ff88', stroke: '#ffffff', strokeWidth: 2 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -269,35 +292,57 @@ export function OceanographicAnalysis() {
               <CardContent>
                 <ChartContainer
                   config={{
-                    chlorophyll: { label: "Chlorophyll-a", color: "hsl(var(--chart-3))" },
-                    waveHeight: { label: "Wave Height", color: "hsl(var(--chart-4))" },
+                    chlorophyll: { label: "Chlorophyll-a", color: "#ffaa00" },
+                    waveHeight: { label: "Wave Height", color: "#ff4757" },
                   }}
-                  className="h-80"
+                  className="h-80 chart-mobile-small"
                 >
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={realtimeOceanData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="time" />
-                      <YAxis yAxisId="left" orientation="left" />
-                      <YAxis yAxisId="right" orientation="right" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                      <XAxis 
+                        dataKey="time"
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
+                      <YAxis 
+                        yAxisId="left" 
+                        orientation="left"
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
+                      <YAxis 
+                        yAxisId="right" 
+                        orientation="right"
+                        tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                        axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                        tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      />
                       <ChartTooltip content={<ChartTooltipContent />} />
-                      <Legend />
+                      <Legend 
+                        wrapperStyle={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                      />
                       <Area 
                         yAxisId="left"
                         type="monotone" 
                         dataKey="chlorophyll" 
-                        stroke="var(--color-chart-3)" 
-                        fill="var(--color-chart-3)"
-                        fillOpacity={0.3}
+                        stroke="#ffaa00" 
+                        fill="#ffaa00"
+                        fillOpacity={0.2}
+                        strokeWidth={3}
                         name="Chlorophyll-a (mg/m³)"
                       />
                       <Line 
                         yAxisId="right"
                         type="monotone" 
                         dataKey="waveHeight" 
-                        stroke="var(--color-chart-4)" 
-                        strokeWidth={2}
+                        stroke="#ff4757" 
+                        strokeWidth={3}
                         name="Wave Height (m)"
+                        dot={{ fill: "#ff4757", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                        activeDot={{ r: 6, fill: '#ff4757', stroke: '#ffffff', strokeWidth: 2 }}
                       />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -316,42 +361,65 @@ export function OceanographicAnalysis() {
             <CardContent>
               <ChartContainer
                 config={{
-                  temp: { label: "Temperature", color: "hsl(var(--chart-1))" },
-                  chlorophyll: { label: "Chlorophyll", color: "hsl(var(--chart-2))" },
-                  productivity: { label: "Productivity Index", color: "hsl(var(--chart-3))" },
+                  temp: { label: "Temperature", color: "#00d4ff" },
+                  chlorophyll: { label: "Chlorophyll", color: "#00ff88" },
+                  productivity: { label: "Productivity Index", color: "#7c4dff" },
                 }}
-                className="h-96"
+                className="h-96 chart-mobile-small"
               >
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={monthlyTrends}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis yAxisId="left" orientation="left" />
-                    <YAxis yAxisId="right" orientation="right" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                    <XAxis 
+                      dataKey="month"
+                      tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                      axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                    />
+                    <YAxis 
+                      yAxisId="left" 
+                      orientation="left"
+                      tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                      axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                    />
+                    <YAxis 
+                      yAxisId="right" 
+                      orientation="right"
+                      tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                      axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                      tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                    />
                     <ChartTooltip content={<ChartTooltipContent />} />
-                    <Legend />
+                    <Legend 
+                      wrapperStyle={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                    />
                     <Line 
                       yAxisId="left"
                       type="monotone" 
                       dataKey="temp" 
-                      stroke="var(--color-chart-1)" 
+                      stroke="#00d4ff" 
                       strokeWidth={3}
                       name="Temperature (°C)"
+                      dot={{ fill: "#00d4ff", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                      activeDot={{ r: 6, fill: '#00d4ff', stroke: '#ffffff', strokeWidth: 2 }}
                     />
                     <Line 
                       yAxisId="left"
                       type="monotone" 
                       dataKey="chlorophyll" 
-                      stroke="var(--color-chart-2)" 
+                      stroke="#00ff88" 
                       strokeWidth={3}
                       name="Chlorophyll-a (mg/m³)"
+                      dot={{ fill: "#00ff88", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                      activeDot={{ r: 6, fill: '#00ff88', stroke: '#ffffff', strokeWidth: 2 }}
                     />
                     <Line 
                       yAxisId="right"
                       type="monotone" 
                       dataKey="productivity" 
-                      stroke="var(--color-chart-3)" 
-                      strokeWidth={2}
+                      stroke="#7c4dff" 
+                      strokeWidth={3}
                       strokeDasharray="5 5"
                       name="Productivity Index"
                     />

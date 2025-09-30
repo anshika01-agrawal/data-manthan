@@ -21,11 +21,11 @@
   --border: rgba(59, 130, 246, 0.2);
   --input: rgba(15, 23, 42, 0.8);
   --ring: #0ea5e9;
-  --chart-1: #0ea5e9;
-  --chart-2: #22c55e;
-  --chart-3: #f59e0b;
-  --chart-4: #ef4444;
-  --chart-5: #8b5cf6;
+  --chart-1: #00d4ff;
+  --chart-2: #00ff88;
+  --chart-3: #ffaa00;
+  --chart-4: #ff4757;
+  --chart-5: #7c4dff;
   --radius: 0.75rem;
   --sidebar: rgba(15, 23, 42, 0.9);
   --sidebar-foreground: #ffffff;
@@ -336,9 +336,66 @@ button:not(.start-now-button) {
 /* Chart and visualization containers */
 .recharts-wrapper,
 .chart-container {
-  background: rgba(15, 23, 42, 0.6) !important;
-  border-radius: 8px !important;
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-radius: 12px !important;
   padding: 16px !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Enhanced chart styling */
+.recharts-surface {
+  background: rgba(15, 23, 42, 0.9) !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(59, 130, 246, 0.3) !important;
+}
+
+.recharts-xAxis .recharts-cartesian-axis-line,
+.recharts-yAxis .recharts-cartesian-axis-line {
+  stroke: rgba(59, 130, 246, 0.5) !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Chart lines and areas with vibrant colors */
+.recharts-line {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.recharts-area {
+  opacity: 0.3;
+}
+
+/* Legend styling */
+.recharts-legend-wrapper {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  margin-top: 8px !important;
+}
+
+.recharts-legend-item-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+}
+
+/* Tooltip styling */
+.recharts-tooltip-wrapper {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.recharts-tooltip-content {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: white !important;
 }
 
 /* Table styling */

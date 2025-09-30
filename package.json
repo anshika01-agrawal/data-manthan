@@ -18,6 +18,9 @@
     "db:reset": "npx tsx scripts/resetDatabase.ts",
     "data:fetch": "npx tsx scripts/fetchRealTimeData.ts",
     "data:ncbi": "npx tsx scripts/fetchNCBIData.ts",
+    "db:init": "npx tsx scripts/initializeDatabase.ts",
+    "db:setup": "./scripts/setup-mongodb.sh",
+    "data:generate": "npx tsx scripts/generateRealTimeData.ts",
     "data:start": "npx tsx scripts/startDataCollection.ts",
     "type-check": "tsc --noEmit"
   },

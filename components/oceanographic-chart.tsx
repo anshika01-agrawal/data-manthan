@@ -23,32 +23,32 @@ export function OceanographicChart() {
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h3 className="text-lg font-semibold">Eastern Arabian Sea Parameters</h3>
+        <h3 className="text-lg font-semibold text-white">Eastern Arabian Sea Parameters</h3>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm">
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-1 rounded-full mr-2"></div>
-            <span>Temperature (°C)</span>
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor: '#00d4ff'}}></div>
+            <span className="text-white">Temperature (°C)</span>
           </div>
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-chart-2 rounded-full mr-2"></div>
-            <span>Chlorophyll (mg/m³)</span>
+            <div className="w-3 h-3 rounded-full mr-2" style={{backgroundColor: '#00ff88'}}></div>
+            <span className="text-white">Chlorophyll (mg/m³)</span>
           </div>
         </div>
       </div>
 
           <ChartContainer
-      config={{
-        temperature: {
-          label: "Temperature",
-          color: "hsl(var(--chart-1))",
-        },
-        chlorophyll: {
-          label: "Chlorophyll",
-          color: "hsl(var(--chart-2))",
-        },
-      }}
-      className="h-[200px] sm:h-[250px] md:h-[300px] chart-mobile-small"
-    >
+        config={{
+          temperature: {
+            label: "Temperature",
+            color: "#00d4ff",
+          },
+          chlorophyll: {
+            label: "Chlorophyll",
+            color: "#00ff88",
+          },
+        }}
+        className="h-[200px] sm:h-[250px] md:h-[300px] chart-mobile-small"
+      >
       <ResponsiveContainer width="100%" height="100%">
           <LineChart data={oceanData} margin={{ top: 5, right: 15, left: 5, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -68,18 +68,20 @@ export function OceanographicChart() {
             <Line
               type="monotone"
               dataKey="temperature"
-              stroke="var(--color-chart-1)"
+              stroke="#00d4ff"
               name="Temperature (°C)"
-              strokeWidth={2}
-              dot={{ r: 3 }}
+              strokeWidth={3}
+              dot={{ r: 4, fill: '#00d4ff', strokeWidth: 2, stroke: '#ffffff' }}
+              activeDot={{ r: 6, fill: '#00d4ff', stroke: '#ffffff', strokeWidth: 2 }}
             />
             <Line
               type="monotone"
               dataKey="chlorophyll"
-              stroke="var(--color-chart-2)"
+              stroke="#00ff88"
               name="Chlorophyll (mg/m³)"
-              strokeWidth={2}
-              dot={{ r: 3 }}
+              strokeWidth={3}
+              dot={{ r: 4, fill: '#00ff88', strokeWidth: 2, stroke: '#ffffff' }}
+              activeDot={{ r: 6, fill: '#00ff88', stroke: '#ffffff', strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
