@@ -14,7 +14,8 @@
     "start": "next start",
     "export": "next export",
     "db:seed": "npx tsx scripts/seedDatabase.ts",
-    "db:test": "node scripts/testConnection.js",  
+    "db:test": "node scripts/testConnection.js",
+    "db:test-advanced": "node scripts/testAdvancedConnection.js",
     "db:reset": "npx tsx scripts/resetDatabase.ts",
     "data:fetch": "npx tsx scripts/fetchRealTimeData.ts",
     "data:ncbi": "npx tsx scripts/fetchNCBIData.ts",
@@ -22,6 +23,8 @@
     "db:setup": "./scripts/setup-mongodb.sh",
     "data:generate": "npx tsx scripts/generateRealTimeData.ts",
     "data:start": "npx tsx scripts/startDataCollection.ts",
+    "db:auto-init": "npx tsx scripts/autoInitDB.ts",
+    "start-complete": "./start-data-manthan.sh",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

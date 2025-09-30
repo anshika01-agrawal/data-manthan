@@ -7,12 +7,12 @@ import { Pie, PieChart, ResponsiveContainer, Cell } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 
 const phylumData = [
-  { name: "Chordata", value: 342, percentage: 27.4, color: "hsl(var(--chart-1))" },
-  { name: "Arthropoda", value: 289, percentage: 23.2, color: "hsl(var(--chart-2))" },
-  { name: "Mollusca", value: 156, percentage: 12.5, color: "hsl(var(--chart-3))" },
-  { name: "Cnidaria", value: 134, percentage: 10.7, color: "hsl(var(--chart-4))" },
-  { name: "Annelida", value: 98, percentage: 7.9, color: "hsl(var(--chart-5))" },
-  { name: "Others", value: 228, percentage: 18.3, color: "hsl(var(--muted))" },
+  { name: "Chordata", value: 342, percentage: 27.4, color: "#00d4ff" },
+  { name: "Arthropoda", value: 289, percentage: 23.2, color: "#00ff88" },
+  { name: "Mollusca", value: 156, percentage: 12.5, color: "#ffaa00" },
+  { name: "Cnidaria", value: 134, percentage: 10.7, color: "#ff4757" },
+  { name: "Annelida", value: 98, percentage: 7.9, color: "#7c4dff" },
+  { name: "Others", value: 228, percentage: 18.3, color: "#ff6b9d" },
 ]
 
 const speciesData = [
@@ -43,7 +43,7 @@ export function TaxonomicComposition() {
                   label: "ASV Count",
                 },
               }}
-              className="h-[300px]"
+              className="h-[250px] md:h-[300px] chart-mobile-small"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -52,8 +52,11 @@ export function TaxonomicComposition() {
                     cx="50%"
                     cy="50%"
                     outerRadius={80}
+                    innerRadius={20}
                     dataKey="value"
                     label={({ name, percentage }) => `${name} (${percentage}%)`}
+                    stroke="#ffffff"
+                    strokeWidth={2}
                   >
                     {phylumData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />

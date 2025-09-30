@@ -33,23 +33,35 @@ export function SequenceQualityChart() {
             config={{
               quality: {
                 label: "Quality Score",
-                color: "hsl(var(--chart-1))",
+                color: "#00d4ff",
               },
             }}
-            className="h-[250px]"
+            className="h-[200px] md:h-[250px] chart-mobile-small"
           >
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={qualityData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="position" label={{ value: "Position (bp)", position: "insideBottom", offset: -5 }} />
-                <YAxis label={{ value: "Quality Score", angle: -90, position: "insideLeft" }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                <XAxis 
+                  dataKey="position" 
+                  label={{ value: "Position (bp)", position: "insideBottom", offset: -5, style: { textAnchor: 'middle', fill: 'rgba(255, 255, 255, 0.8)' } }}
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
+                <YAxis 
+                  label={{ value: "Quality Score", angle: -90, position: "insideLeft", style: { textAnchor: 'middle', fill: 'rgba(255, 255, 255, 0.8)' } }}
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Line
                   type="monotone"
                   dataKey="quality"
-                  stroke="var(--color-chart-1)"
+                  stroke="#00d4ff"
                   strokeWidth={3}
-                  dot={{ fill: "var(--color-chart-1)", strokeWidth: 2, r: 4 }}
+                  dot={{ fill: "#00d4ff", strokeWidth: 2, r: 4, stroke: '#ffffff' }}
+                  activeDot={{ r: 6, fill: '#00d4ff', stroke: '#ffffff', strokeWidth: 2 }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -63,18 +75,33 @@ export function SequenceQualityChart() {
             config={{
               count: {
                 label: "Read Count",
-                color: "hsl(var(--chart-2))",
+                color: "#00ff88",
               },
             }}
-            className="h-[250px]"
+            className="h-[200px] md:h-[250px] chart-mobile-small"
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={lengthDistribution} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="length" label={{ value: "Length (bp)", position: "insideBottom", offset: -5 }} />
-                <YAxis label={{ value: "Count", angle: -90, position: "insideLeft" }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                <XAxis 
+                  dataKey="length" 
+                  label={{ value: "Length (bp)", position: "insideBottom", offset: -5, style: { textAnchor: 'middle', fill: 'rgba(255, 255, 255, 0.8)' } }}
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
+                <YAxis 
+                  label={{ value: "Count", angle: -90, position: "insideLeft", style: { textAnchor: 'middle', fill: 'rgba(255, 255, 255, 0.8)' } }}
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar dataKey="count" fill="var(--color-chart-2)" />
+                <Bar 
+                  dataKey="count" 
+                  fill="#00ff88"
+                  radius={[4, 4, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>

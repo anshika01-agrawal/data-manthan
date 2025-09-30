@@ -60,59 +60,81 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    await connectDB()
-    
     const { searchParams } = new URL(request.url)
-    const dataType = searchParams.get('type')
-    const limit = parseInt(searchParams.get('limit') || '20')
+    const type = searchParams.get('type') || 'all'
+    const limit = parseInt(searchParams.get('limit') || '50')
     
-    let data
-    let total
-
-    switch (dataType) {
-      case 'species':
-        data = await Species.find({}).limit(limit).sort({ createdAt: -1 })
-        total = await Species.countDocuments()
-        break
-        
-      case 'genetic-sequence':
-        data = await GeneticSequence.find({}).limit(limit).sort({ submissionDate: -1 }).select('-sequence')
-        total = await GeneticSequence.countDocuments()
-        break
-        
-      case 'oceanographic':
-        data = await OceanographicData.find({}).limit(limit).sort({ measurementDate: -1 })
-        total = await OceanographicData.countDocuments()
-        break
-        
-      case 'edna':
-        data = await EdnaAnalysis.find({}).limit(limit).sort({ collectionDate: -1 })
-        total = await EdnaAnalysis.countDocuments()
-        break
-        
-      case 'otolith':
-        data = await OtolithAnalysis.find({}).limit(limit).sort({ analysisDate: -1 })
-        total = await OtolithAnalysis.countDocuments()
-        break
-        
-      default:
-        return NextResponse.json(
-          { success: false, error: 'Invalid data type' },
-          { status: 400 }
-        )
+    // Try to connect to database
+    try {
+      await connectDB()
+      console.log('✅ Database connected, fetching real data')
+    } catch (dbError) {
+      console.log('⚠️  Database not available, using mock data')
+      // Import and return mock data
+      const { getMockDashboardStats } = await import('@/lib/mockDataService')
+      const mockStats = await getMockDashboardStats()
+      return NextResponse.json({
+        success: true,
+        data: {
+          species: type === 'all' || type === 'species' ? mockStats.speciesDistribution : undefined,
+          oceanographic: type === 'all' || type === 'oceanographic' ? mockStats.oceanographicTrend : undefined,
+          edna: type === 'all' || type === 'edna' ? [] : undefined,
+          otolith: type === 'all' || type === 'otolith' ? [] : undefined,
+          genetic: type === 'all' || type === 'genetic' ? [] : undefined
+        },
+        source: 'mock',
+        timestamp: new Date().toISOString()
+      })
     }
-
+    
+    let data: any = {}
+    
+    if (type === 'all' || type === 'species') {
+      data.species = await Species.find({}).limit(limit).lean()
+    }
+    
+    if (type === 'all' || type === 'oceanographic') {
+      data.oceanographic = await OceanographicData.find({})
+        .sort({ measurementDate: -1 })
+        .limit(limit)
+        .lean()
+    }
+    
+    if (type === 'all' || type === 'edna') {
+      data.edna = await EdnaAnalysis.find({})
+        .sort({ collectionDate: -1 })
+        .limit(limit)
+        .lean()
+    }
+    
+    if (type === 'all' || type === 'otolith') {
+      data.otolith = await OtolithAnalysis.find({})
+        .sort({ analysisDate: -1 })
+        .limit(limit)
+        .lean()
+    }
+    
+    if (type === 'all' || type === 'genetic') {
+      data.genetic = await GeneticSequence.find({})
+        .sort({ submissionDate: -1 })
+        .limit(limit)
+        .select('-sequence')
+        .lean()
+    }
+    
     return NextResponse.json({
       success: true,
       data,
-      total,
-      limit
+      timestamp: new Date().toISOString()
     })
-    
   } catch (error) {
     console.error('Error fetching data:', error)
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch data' },
+      { 
+        success: false,
+        error: 'Failed to fetch data',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     )
   }

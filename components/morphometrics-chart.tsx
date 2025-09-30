@@ -43,36 +43,44 @@ export function MorphometricsChart() {
             config={{
               value: {
                 label: "Current Sample",
-                color: "hsl(var(--chart-1))",
+                color: "#00d4ff",
               },
               reference: {
                 label: "Species Average",
-                color: "hsl(var(--chart-2))",
+                color: "#00ff88",
               },
             }}
-            className="h-[300px]"
+            className="h-[250px] md:h-[300px] chart-mobile-small"
           >
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={morphometricData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="parameter" />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} />
+                <PolarGrid stroke="rgba(59, 130, 246, 0.3)" />
+                <PolarAngleAxis 
+                  dataKey="parameter" 
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                />
+                <PolarRadiusAxis 
+                  angle={90} 
+                  domain={[0, 100]}
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 10 }}
+                  tickCount={6}
+                />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Radar
                   name="Current Sample"
                   dataKey="value"
-                  stroke="var(--color-chart-1)"
-                  fill="var(--color-chart-1)"
-                  fillOpacity={0.3}
-                  strokeWidth={2}
+                  stroke="#00d4ff"
+                  fill="#00d4ff"
+                  fillOpacity={0.2}
+                  strokeWidth={3}
                 />
                 <Radar
                   name="Species Average"
                   dataKey="reference"
-                  stroke="var(--color-chart-2)"
-                  fill="var(--color-chart-2)"
+                  stroke="#00ff88"
+                  fill="#00ff88"
                   fillOpacity={0.1}
-                  strokeWidth={2}
+                  strokeWidth={3}
                   strokeDasharray="5 5"
                 />
               </RadarChart>
@@ -87,23 +95,42 @@ export function MorphometricsChart() {
             config={{
               current: {
                 label: "Current",
-                color: "hsl(var(--chart-1))",
+                color: "#ffaa00",
               },
               mean: {
                 label: "Population Mean",
-                color: "hsl(var(--chart-3))",
+                color: "#7c4dff",
               },
             }}
-            className="h-[300px]"
+            className="h-[250px] md:h-[300px] chart-mobile-small"
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={shapeDescriptors} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="descriptor" />
-                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(59, 130, 246, 0.3)" />
+                <XAxis 
+                  dataKey="descriptor"
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
+                <YAxis 
+                  tick={{ fill: 'rgba(255, 255, 255, 0.8)', fontSize: 12 }}
+                  axisLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                  tickLine={{ stroke: 'rgba(59, 130, 246, 0.5)' }}
+                />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar dataKey="current" fill="var(--color-chart-1)" name="Current Sample" />
-                <Bar dataKey="mean" fill="var(--color-chart-3)" name="Population Mean" />
+                <Bar 
+                  dataKey="current" 
+                  fill="#ffaa00" 
+                  name="Current Sample"
+                  radius={[4, 4, 0, 0]}
+                />
+                <Bar 
+                  dataKey="mean" 
+                  fill="#7c4dff" 
+                  name="Population Mean"
+                  radius={[4, 4, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </ChartContainer>
