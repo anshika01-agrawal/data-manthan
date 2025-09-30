@@ -8,7 +8,7 @@ import { BiodiversityMap } from "@/components/biodiversity-map"
 import { TemperatureDepthChart } from "@/components/temperature-depth-chart"
 import { ChlorophyllTrendChart } from "@/components/chlorophyll-trend-chart"
 import { SalinityHeatmap } from "@/components/salinity-heatmap"
-import { biodiversityData, oceanographicData, ednaProcessingData, otolithAnalysisData } from "@/lib/dummyData"
+import { biodiversityData, oceanographicData, ednaProcessingData, otolithAnalysisData } from "@/lib/mockDataService"
 
 export function DashboardContent() {
   return (
@@ -93,7 +93,7 @@ export function DashboardContent() {
           <CardContent>
             <div className="text-xl md:text-2xl font-bold">{ednaProcessingData.length}</div>
             <p className="text-xs md:text-sm text-muted-foreground">
-              Avg quality: {Math.round(ednaProcessingData.reduce((acc, item) => acc + item.quality, 0) / ednaProcessingData.length)}%
+              Avg quality: {Math.round(ednaProcessingData.reduce((acc, item) => acc + item.qualityScore, 0) / ednaProcessingData.length)}%
             </p>
             <Progress value={92} className="mt-2" />
           </CardContent>
@@ -156,19 +156,19 @@ export function DashboardContent() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {biodiversityData.map((item, idx) => (
+              {biodiversityData.slice(0, 5).map((item, idx) => (
                 <div key={idx} className="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20">
                   <div className="flex items-center space-x-3">
                     <Fish className="h-4 w-4 text-blue-600" />
                     <div>
-                      <p className="font-medium">{item.species}</p>
-                      <p className="text-sm text-muted-foreground">{item.location}</p>
+                      <p className="font-medium">{item.scientificName}</p>
+                      <p className="text-sm text-muted-foreground">{item.commonName}</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="font-bold">{item.count}</p>
-                    <Badge variant={item.trend === "increasing" ? "default" : item.trend === "stable" ? "secondary" : "destructive"}>
-                      {item.trend}
+                    <Badge variant={item.conservationStatus === "LC" ? "secondary" : item.conservationStatus === "NT" ? "default" : "destructive"}>
+                      {item.conservationStatus}
                     </Badge>
                   </div>
                 </div>
