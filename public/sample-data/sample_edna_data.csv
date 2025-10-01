@@ -1,0 +1,11 @@
+sampleId,siteName,collectionDate,longitude,latitude,depth,sampleType,sequencingPlatform,totalReads,qualityReads,uniqueTaxa,richness,shannon,simpson,evenness
+eDNA_001,Mangalore Coast,2024-01-15,75.1234,13.5678,25.5,Water,Illumina MiSeq,150000,142500,89,45,3.2,0.85,0.78
+eDNA_002,Kochi Backwaters,2024-01-16,76.2345,9.9876,12.3,Sediment,Illumina MiSeq,175000,166250,112,67,3.8,0.91,0.82
+eDNA_003,Goa Estuary,2024-01-17,73.8567,15.4321,8.9,Water,Illumina MiSeq,128000,120960,78,38,2.9,0.78,0.73
+eDNA_004,Mumbai Harbor,2024-01-18,72.8456,19.0567,15.6,Sediment,Illumina MiSeq,198000,188100,134,82,4.1,0.94,0.86
+eDNA_005,Chennai Marina,2024-01-19,80.2789,13.0456,18.2,Water,Illumina MiSeq,162000,153900,95,52,3.5,0.88,0.79
+eDNA_006,Visakhapatnam Port,2024-01-20,83.3012,17.6789,22.4,Sediment,Illumina MiSeq,185000,175750,118,71,3.9,0.92,0.84
+eDNA_007,Paradip Coast,2024-01-21,86.6234,20.2567,28.7,Water,Illumina MiSeq,143000,135850,87,42,3.1,0.83,0.76
+eDNA_008,Kolkata Sundarbans,2024-01-22,88.3678,22.5789,11.2,Sediment,Illumina MiSeq,167000,158650,103,59,3.6,0.89,0.81
+eDNA_009,Puducherry Coast,2024-01-23,79.8345,11.9234,19.8,Water,Illumina MiSeq,156000,148200,91,48,3.3,0.86,0.77
+eDNA_010,Karwar Beach,2024-01-24,74.1267,14.8123,16.5,Sediment,Illumina MiSeq,171000,162450,108,63,3.7,0.90,0.83

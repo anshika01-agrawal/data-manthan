@@ -1,0 +1,11 @@
+scientificName,commonName,kingdom,phylum,class,order,family,genus,longitude,latitude,depth,habitat,conservationStatus,localName
+Sardinella longiceps,Indian Oil Sardine,Animalia,Chordata,Actinopterygii,Clupeiformes,Clupeidae,Sardinella,75.1234,13.5678,25.5,Pelagic,Least Concern,Tarle
+Rastrelliger kanagurta,Indian Mackerel,Animalia,Chordata,Actinopterygii,Perciformes,Scombridae,Rastrelliger,74.8567,14.2345,18.2,Pelagic,Least Concern,Bangude
+Thunnus albacares,Yellowfin Tuna,Animalia,Chordata,Actinopterygii,Perciformes,Scombridae,Thunnus,73.2456,12.9876,45.8,Epipelagic,Near Threatened,Kari Meen
+Katsuwonus pelamis,Skipjack Tuna,Animalia,Chordata,Actinopterygii,Perciformes,Scombridae,Katsuwonus,72.7890,11.4567,38.9,Epipelagic,Least Concern,Choora
+Decapterus russelli,Indian Scad,Animalia,Chordata,Actinopterygii,Perciformes,Carangidae,Decapterus,75.5678,15.1234,22.3,Pelagic,Least Concern,Chemballi
+Stolephorus commersonnii,Commerson's Anchovy,Animalia,Chordata,Actinopterygii,Clupeiformes,Engraulidae,Stolephorus,74.9876,13.7890,15.6,Pelagic,Least Concern,Netholi
+Nemipterus japonicus,Japanese Threadfin Bream,Animalia,Chordata,Actinopterygii,Perciformes,Nemipteridae,Nemipterus,75.3456,14.5678,35.4,Demersal,Least Concern,Thambala
+Priacanthus hamrur,Moontail Bullseye,Animalia,Chordata,Actinopterygii,Perciformes,Priacanthidae,Priacanthus,73.8901,12.3456,28.7,Demersal,Least Concern,Chempalli
+Epinephelus malabaricus,Malabar Grouper,Animalia,Chordata,Actinopterygii,Perciformes,Serranidae,Epinephelus,75.6789,13.9012,42.1,Demersal,Least Concern,Kalava
+Lutjanus argentimaculatus,Mangrove Red Snapper,Animalia,Chordata,Actinopterygii,Perciformes,Lutjanidae,Lutjanus,74.5678,14.7890,31.8,Demersal,Least Concern,Rane

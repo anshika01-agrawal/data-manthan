@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { NavigationHistoryProvider } from "@/hooks/use-navigation-history"
 import { ChatbotIframe } from "@/components/chatbot-iframe"
+import AuthProvider from "@/components/auth-provider"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
       <body className="antialiased dark">
-        <ThemeProvider>
-          <NavigationHistoryProvider>
-            {children}
-            <ChatbotIframe />
-          </NavigationHistoryProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <NavigationHistoryProvider>
+              {children}
+              <ChatbotIframe />
+            </NavigationHistoryProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

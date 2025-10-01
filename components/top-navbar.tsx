@@ -2,11 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain, Users, GitBranch, ChevronDown, MoreHorizontal } from "lucide-react"
+import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Brain, Users, GitBranch, ChevronDown, MoreHorizontal, Upload } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { UserMenu } from "@/components/user-menu"
 
 // Main navigation items (always visible)
 const mainMenuItems = [
@@ -21,6 +22,7 @@ const mainMenuItems = [
 
 // Dropdown menu items (in "More" dropdown)
 const dropdownMenuItems = [
+  { icon: Upload, label: "Data Upload", href: "/data-upload", active: false },
   { icon: GitBranch, label: "Collaboration", href: "/collaboration", active: false },
   { icon: Brain, label: "Fish Classification", href: "https://aqua-ai-omega.vercel.app", active: false, external: true },
   { icon: Settings, label: "Settings", href: "#", active: false },
@@ -109,8 +111,14 @@ export function TopNavbar() {
             </DropdownMenu>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Desktop User Menu */}
+          <div className="hidden md:flex md:items-center">
+            <UserMenu />
+          </div>
+
+          {/* Mobile menu button and user menu */}
+          <div className="md:hidden flex items-center space-x-2">
+            <UserMenu />
             <Button
               variant="ghost"
               size="sm"
@@ -125,9 +133,9 @@ export function TopNavbar() {
             </Button>
           </div>
 
-          {/* Desktop right side - removed Settings since it's now in dropdown */}
+          {/* Desktop right side */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {/* Space for future desktop-only features */}
+            <UserMenu />
           </div>
         </div>
 

@@ -1,0 +1,11 @@
+specimenId,species,length,width,weight,thickness,ageEstimate,captureDate,longitude,latitude,depth,fishLength,fishWeight,maturityStage,growthRings
+OTO_001,Sardinella longiceps,8.5,4.2,0.012,1.8,2,2024-01-10,75.1234,13.5678,25.5,18.5,45.2,Adult,12
+OTO_002,Rastrelliger kanagurta,12.3,6.8,0.028,2.1,3,2024-01-11,74.8567,14.2345,18.2,22.1,68.9,Adult,18
+OTO_003,Thunnus albacares,18.7,9.2,0.085,3.4,5,2024-01-12,73.2456,12.9876,45.8,85.4,2150.0,Adult,35
+OTO_004,Katsuwonus pelamis,15.2,7.6,0.055,2.8,4,2024-01-13,72.7890,11.4567,38.9,65.8,1420.5,Adult,28
+OTO_005,Decapterus russelli,9.8,5.1,0.018,1.9,2,2024-01-14,75.5678,15.1234,22.3,19.8,52.6,Adult,14
+OTO_006,Stolephorus commersonnii,6.2,3.4,0.008,1.2,1,2024-01-15,74.9876,13.7890,15.6,12.4,18.7,Juvenile,8
+OTO_007,Nemipterus japonicus,11.5,5.9,0.024,2.0,3,2024-01-16,75.3456,14.5678,35.4,24.6,125.8,Adult,16
+OTO_008,Priacanthus hamrur,10.2,5.5,0.022,1.8,2,2024-01-17,73.8901,12.3456,28.7,21.3,89.4,Adult,15
+OTO_009,Epinephelus malabaricus,16.8,8.4,0.068,3.1,4,2024-01-18,75.6789,13.9012,42.1,45.2,985.6,Adult,32
+OTO_010,Lutjanus argentimaculatus,14.6,7.2,0.042,2.5,3,2024-01-19,74.5678,14.7890,31.8,32.8,425.7,Adult,22

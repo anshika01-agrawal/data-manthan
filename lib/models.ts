@@ -1,5 +1,32 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
+// User Schema for Authentication
+export interface IUser extends Document {
+  name: string
+  email: string
+  password: string
+  role: 'admin' | 'researcher' | 'user'
+  institution?: string
+  researchArea?: string[]
+  isActive: boolean
+  lastLogin?: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+const UserSchema = new Schema<IUser>({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['admin', 'researcher', 'user'], default: 'user' },
+  institution: String,
+  researchArea: [String],
+  isActive: { type: Boolean, default: true },
+  lastLogin: Date,
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
+})
+
 // Species and Biodiversity Schema
 export interface ISpecies extends Document {
   scientificName: string
@@ -484,6 +511,7 @@ ResearchProjectSchema.index({ startDate: -1 })
 ResearchProjectSchema.index({ 'studyArea.coordinates': '2dsphere' })
 
 // Export models
+export const User = mongoose.models.User || mongoose.model<IUser>('User', UserSchema)
 export const Species = mongoose.models.Species || mongoose.model<ISpecies>('Species', SpeciesSchema)
 export const GeneticSequence = mongoose.models.GeneticSequence || mongoose.model<IGeneticSequence>('GeneticSequence', GeneticSequenceSchema)
 export const OceanographicData = mongoose.models.OceanographicData || mongoose.model<IOceanographicData>('OceanographicData', OceanographicDataSchema)

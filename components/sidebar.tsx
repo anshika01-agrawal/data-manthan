@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves } from "lucide-react"
+import { BarChart3, Database, Microscope, Dna, Map, FileText, Settings, Activity, Fish, Waves, Upload } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -10,6 +10,7 @@ const menuItems = [
   { icon: Map, label: "Data Visualization", href: "/data-visualization", active: false },
   { icon: Fish, label: "Otolith Analysis", href: "/otolith-analysis", active: false },
   { icon: Dna, label: "eDNA Processing", href: "/edna-processing", active: false },
+  { icon: Upload, label: "Data Upload", href: "/data-upload", active: false },
   { icon: Activity, label: "Cross-Domain Analytics", href: "#", active: false },
   { icon: Database, label: "Data Management", href: "#", active: false },
   { icon: Waves, label: "Oceanographic Data", href: "#", active: false },

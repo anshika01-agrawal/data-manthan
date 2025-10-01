@@ -1,0 +1,11 @@
+accessionNumber,organism,gene,sequenceType,sequenceLength,submissionDate,sequencingMethod,qualityScore,gcContent,startCodon,stopCodon,location,specimen
+MN123456,Thunnus albacares,cytochrome oxidase subunit I,DNA,1551,2024-01-15,Sanger,98.5,44.2,ATG,TAG,Mitochondria,YFT_001
+MN123457,Katsuwonus pelamis,16S ribosomal RNA,DNA,1825,2024-01-16,Sanger,97.8,52.1,N/A,N/A,Mitochondria,SKJ_001
+MN123458,Sardinella longiceps,cytochrome b,DNA,1140,2024-01-17,Sanger,99.1,46.8,ATG,TAA,Mitochondria,IOS_001
+MN123459,Rastrelliger kanagurta,NADH dehydrogenase subunit 1,DNA,975,2024-01-18,Sanger,98.2,42.5,ATG,TAG,Mitochondria,IM_001
+MN123460,Decapterus russelli,cytochrome oxidase subunit II,DNA,684,2024-01-19,Sanger,97.5,48.9,ATG,TAA,Mitochondria,IS_001
+MN123461,Stolephorus commersonnii,12S ribosomal RNA,DNA,952,2024-01-20,Sanger,96.8,54.3,N/A,N/A,Mitochondria,CA_001
+MN123462,Nemipterus japonicus,cytochrome oxidase subunit III,DNA,784,2024-01-21,Sanger,98.9,45.1,ATG,TAA,Mitochondria,JTB_001
+MN123463,Priacanthus hamrur,NADH dehydrogenase subunit 2,DNA,1047,2024-01-22,Sanger,97.3,43.7,ATG,TAG,Mitochondria,MB_001
+MN123464,Epinephelus malabaricus,ATP synthase subunit 6,DNA,693,2024-01-23,Sanger,99.2,41.8,ATG,TAA,Mitochondria,MG_001
+MN123465,Lutjanus argentimaculatus,cytochrome oxidase subunit I,DNA,1551,2024-01-24,Sanger,98.7,44.6,ATG,TAG,Mitochondria,MRS_001
