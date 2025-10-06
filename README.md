@@ -1,15 +1,14 @@
-Here’s a complete **README.md script** you can copy & paste (adjust minor items like your team names, email, etc. as needed).
+# Data-manthan-flutter 
 
-````markdown
 # Data Manthan
 
-[![Live Site](https://img.shields.io/badge/Live–Site-🔗-blue)](https://data-manthan.vercel.app/)
+[![Live Site](https://img.shields.io/badge/Live–Site-🔗-blue)](https://data-manthan.vercel.app/) 
 
 **Data Manthan** is a comprehensive data platform (web + mobile) built for unified integration, visualization, and insights over oceanographic, fisheries, and molecular biodiversity data. It aims to break silos between diverse datasets (ocean parameters, fish morphology, taxonomy, eDNA) and make them accessible, interactive, and actionable.
 
 ---
 
-## 🚀 Live Demo 
+## 🚀 Live Demo
 
 Access the live platform here:  
 https://data-manthan.vercel.app/
@@ -22,8 +21,8 @@ https://data-manthan.vercel.app/
 - [Tech Stack](#-tech-stack)  
 - [Screenshots](#-screenshots)  
 - [Getting Started](#-getting-started)  
-  - [Prerequisites](#prerequisites)  
-  - [Setup & Installation](#setup--installation)  
+- [Prerequisites](#prerequisites)  
+- [Setup & Installation](#setup--installation)  
   - [Configuration & Environment](#configuration--environment)  
   - [Running Locally](#running-locally)  
 - [Usage](#-usage)  
@@ -88,7 +87,7 @@ https://data-manthan.vercel.app/
 
 - Node.js (version 16 or above recommended)  
 - npm or yarn / pnpm  
-- MongoDB Atlas cluster (or any MongoDB instance)  
+- MongoDB Atlas cluster (or any MongoDB  instance)  
 - Environment variable settings (see next section)
 
 ### Setup & Installation
@@ -204,10 +203,13 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 **Team Members**
 
-* Your Name (e.g. Anurag Tiwari)
-* Teammate 2
-* Teammate 3
-* …
+* Teammate 1 Anurag Tiwari
+* Teammate 2 Anshika Agrawal
+* Teammate 3 Rohan Bairagi
+* Teammate 4 Rishabharaj Sharma
+* Teammate 5 Pari Meena
+* Teammate 6 Chitransh Sahu
+
 
 **Acknowledgments**
 
@@ -222,13 +224,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 If you have questions, suggestions, or issues, feel free to reach out:
 
-* GitHub:
-* [AnuragTiwari1508](https://github.com/AnuragTiwari1508)
-* [anshika01-agrawal](https://github.com/anshika01-agrawal)
-* [ROHANBAIRAGI123](https://github.com/ROHANBAIRAGI123)
-* [rishabharaj](https://github.com/rishabharaj)
+* Email: [your_email@domain.com](mailto:your_email@domain.com)
+* GitHub: [AnuragTiwari1508](https://github.com/AnuragTiwari1508)
 
 ---
 
 Thank you for exploring **Data Manthan** — we hope this project helps pave the way for better integrated marine data science! 🌊
-
