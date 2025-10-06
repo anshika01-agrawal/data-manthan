@@ -1,5 +1,3 @@
-# Data-manthan-flutter 
-
 # Data Manthan
 
 [![Live Site](https://img.shields.io/badge/Live–Site-🔗-blue)](https://data-manthan.vercel.app/) 
@@ -23,8 +21,8 @@ https://data-manthan.vercel.app/
 - [Getting Started](#-getting-started)  
 - [Prerequisites](#prerequisites)  
 - [Setup & Installation](#setup--installation)  
-  - [Configuration & Environment](#configuration--environment)  
-  - [Running Locally](#running-locally)  
+- [Configuration & Environment](#configuration--environment)  
+- [Running Locally](#running-locally)  
 - [Usage](#-usage)  
 - [Project Architecture](#-project-architecture)  
 - [API / Backend](#-api--backend)  
@@ -224,9 +222,13 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 If you have questions, suggestions, or issues, feel free to reach out:
 
-* Email: [your_email@domain.com](mailto:your_email@domain.com)
-* GitHub: [AnuragTiwari1508](https://github.com/AnuragTiwari1508)
+* GitHub:
+* [AnuragTiwari1508](https://github.com/AnuragTiwari1508)
+* [anshika01-agrawal](https://github.com/anshika01-agrawal)
+* [ROHANBAIRAGI123](https://github.com/ROHANBAIRAGI123)
+* [rishabharaj](https://github.com/rishabharaj)
 
 ---
 
 Thank you for exploring **Data Manthan** — we hope this project helps pave the way for better integrated marine data science! 🌊
+
